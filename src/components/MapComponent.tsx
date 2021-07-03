@@ -17,7 +17,6 @@ import Style from 'ol/style/Style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 
-import testPic from '../map-icons/aaa.png';
 
 import 'ol/ol.css';
 
@@ -81,11 +80,10 @@ export const MapComponent: FunctionComponent = () => {
 
     newFeature.setId(0);
 
-    console.log(`testPic`, testPic);
 
     const featureStyle: Style = new Style({
       image: new Icon({
-        src: testPic,
+        src: 'null',
         anchor: [0, 0],
         size: [32, 32]
       })
@@ -93,8 +91,6 @@ export const MapComponent: FunctionComponent = () => {
 
     newFeature.setStyle(featureStyle);
     defaultSource.addFeature(newFeature);
-
-    console.log(defaultLayer.getSource().getFeatureById(0));
   };
 
   return (
