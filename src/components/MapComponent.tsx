@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 
-import { defaults as defaultControls, FullScreen, ScaleLine } from 'ol/control';
+import { defaults as defaultControls } from 'ol/control';
 import Feature from 'ol/Feature';
 import Icon from 'ol/style/Icon';
 import { fromLonLat } from 'ol/proj';
@@ -38,13 +38,7 @@ export const MapComponent: FunctionComponent = () => {
     defaultLayer.setSource(defaultSource);
 
     const map: Map = new Map({
-      controls: defaultControls().extend([
-        new FullScreen(),
-        new ScaleLine({
-          bar: true,
-          steps: 4
-        })
-      ]),
+      controls: defaultControls(),
       target: mapRef.current as HTMLElement,
       layers: [
         new TileLayer({
@@ -68,9 +62,9 @@ export const MapComponent: FunctionComponent = () => {
         center: fromLonLat([-73.95, 40.7]),
         zoom: 9
       })
-    );
-    map!.setTarget(mapRef.current as HTMLElement);
-  };
+      );
+    };
+
 
   const addFeatureButtonClicked = (): void => {
     const newFeature: Feature = new Feature({
@@ -79,7 +73,6 @@ export const MapComponent: FunctionComponent = () => {
     });
 
     newFeature.setId(0);
-
 
     const featureStyle: Style = new Style({
       image: new Icon({
@@ -94,7 +87,7 @@ export const MapComponent: FunctionComponent = () => {
   };
 
   return (
-    <div id="map-root">
+    <div id="map-container">
       <button onClick={testButtonClicked}>Test Btn</button>
       <button onClick={addFeatureButtonClicked}>Add Feature</button>
       <div id="map" ref={mapRef} style={mapStyles} />
