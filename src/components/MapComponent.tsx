@@ -7,7 +7,7 @@ import { useRef } from 'react';
 import { defaults as defaultControls } from 'ol/control';
 import Feature from 'ol/Feature';
 import Icon from 'ol/style/Icon';
-import { fromLonLat } from 'ol/proj';
+import { fromLonLat /*,toLonLat*/ } from 'ol/proj';
 import { Map } from 'ol';
 import OSM from 'ol/source/OSM';
 import Point from 'ol/geom/Point';
@@ -16,21 +16,20 @@ import { View } from 'ol';
 import Style from 'ol/style/Style';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import { MapBrowserEvent } from 'ol';
 
-
+import healthIcon from '../map-icons/health-icon.png';
+import medicine from '../map-icons/123123.svg'
 import 'ol/ol.css';
+import '../styles/MapComponent.css'
 
-const mapStyles = {
-  width: '100%',
-  height: '500px'
-};
 
 export const MapComponent: FunctionComponent = () => {
   const [map, setMap] = useState<Map>();
   // eslint-disable-next-line
-  const [defaultLayer, setDefaultLayer] = useState<VectorLayer>(new VectorLayer());
-  // eslint-disable-next-line
   const [defaultSource, setDefaultSource] = useState<VectorSource>(new VectorSource());
+  // eslint-disable-next-line
+  const [defaultLayer, setDefaultLayer] = useState<VectorLayer>(new VectorLayer());
 
   const mapRef = useRef<HTMLDivElement>(null);
 
@@ -47,38 +46,41 @@ export const MapComponent: FunctionComponent = () => {
         defaultLayer
       ],
       view: new View({
-        ///  center: fromLonLat([23.8, 61.6]),
-        center: [0, 0],
-        zoom: 3
+        center: fromLonLat([23.8, 61.6]),
+        zoom: 0
       })
     });
+
+    map.on("singleclick", (event: MapBrowserEvent<UIEvent>) => {
+      const featuresd: Feature[] = map.getFeaturesAtPixel(event.pixel) as Feature[];
+      console.log('asd')
+    });
+
     setMap(map);
-    // eslint-disable-next-line
   }, []);
 
   const testButtonClicked = (): void => {
-    map!.setView(
+    map?.setView(
       new View({
         center: fromLonLat([-73.95, 40.7]),
         zoom: 9
       })
-      );
-    };
-
+    );
+  };
 
   const addFeatureButtonClicked = (): void => {
     const newFeature: Feature = new Feature({
       geometry: new Point([0, 0]),
-      name: 'testi nimi'
+      name: 'test of name'
     });
 
-    newFeature.setId(0);
+    const workingSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="91.19" style="fill: #0f0"> <g> <g> <path d="M15,0A49,49,0,0,0,0,35L.2,70H29.8L30,35A49,49,0,0,0,15,0Z"/> <rect y="71.19" width="30" height="20"/> </g> </g> </svg>`;
+
 
     const featureStyle: Style = new Style({
       image: new Icon({
-        src: 'null',
-        anchor: [0, 0],
-        size: [32, 32]
+       // src: 'data:image/svg+xml;utf8,' + escape(medicine)
+          src: medicine
       })
     });
 
@@ -88,9 +90,12 @@ export const MapComponent: FunctionComponent = () => {
 
   return (
     <div id="map-container">
+      <div className="buttons">
+      <button onClick={addFeatureButtonClicked}>lisaa ikoni</button>
       <button onClick={testButtonClicked}>Test Btn</button>
-      <button onClick={addFeatureButtonClicked}>Add Feature</button>
-      <div id="map" ref={mapRef} style={mapStyles} />
+      <button onClick={addFeatureButtonClicked}>Show form component</button>
+      </div>
+      <div id="map" ref={mapRef}> </div>
     </div>
   );
 };

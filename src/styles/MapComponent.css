@@ -1,0 +1,13 @@
+#map-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.buttons {
+    height: max-content;
+}
+
+#map {
+    height: 100%;
+}
