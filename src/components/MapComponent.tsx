@@ -18,11 +18,11 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { MapBrowserEvent } from 'ol';
 
-import healthIcon from '../map-icons/health-icon.png';
-import medicine from '../map-icons/123123.svg'
+import medicine from '../map-icons/cardiogram.svg'
+import test from '../map-icons/makeup.svg'
+
 import 'ol/ol.css';
 import '../styles/MapComponent.css'
-
 
 export const MapComponent: FunctionComponent = () => {
   const [map, setMap] = useState<Map>();
@@ -68,19 +68,19 @@ export const MapComponent: FunctionComponent = () => {
     );
   };
 
+  const imageSize = (src: unknown): number => 
+  (src as HTMLImageElement).height
+
   const addFeatureButtonClicked = (): void => {
     const newFeature: Feature = new Feature({
       geometry: new Point([0, 0]),
       name: 'test of name'
     });
 
-    const workingSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="91.19" style="fill: #0f0"> <g> <g> <path d="M15,0A49,49,0,0,0,0,35L.2,70H29.8L30,35A49,49,0,0,0,15,0Z"/> <rect y="71.19" width="30" height="20"/> </g> </g> </svg>`;
-
-
     const featureStyle: Style = new Style({
       image: new Icon({
-       // src: 'data:image/svg+xml;utf8,' + escape(medicine)
-          src: medicine
+        // src: 'data:image/sv g+xml;utf8,'  + escape(medicine)
+          src: test,
       })
     });
 
