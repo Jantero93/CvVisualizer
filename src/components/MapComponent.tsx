@@ -28,6 +28,7 @@ export const MapComponent: React.FC = () => {
 
   const addFeatureButtonClicked = (): void => {
     map?.addLayer('juttuja');
+
     map?.addSVG(0, 50, 'medicine', medicine, 'juttuja');
     map?.getLayer('juttuja');
   };
@@ -39,7 +40,7 @@ export const MapComponent: React.FC = () => {
         <button onClick={testButtonClicked}>Test Btn</button>
         <button onClick={addFeatureButtonClicked}>Show form component</button>
       </div>
-      <div id="map" ref={mapRef} /> 
+      <div id="map" ref={mapRef} />
     </div>
   );
 };
