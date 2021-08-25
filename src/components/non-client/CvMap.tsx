@@ -13,9 +13,6 @@ import Point from 'ol/geom/Point';
 import { View } from 'ol';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
-import Stroke from 'ol/style/Stroke';
-import Text from 'ol/style/Text';
-import Fill from 'ol/style/Fill';
 
 export default class CvMap {
   readonly map: Map;
@@ -50,8 +47,18 @@ export default class CvMap {
    * @param SVG SVG string
    * @param layerId Layer to add. If not given, feature will be added on 'default' layer
    */
-  addSVG(lon: number, lat: number, featureId: string, SVG: string, layerId = 'default'): void {
-    if (this.getAllFeatures().some((feature: Feature) => feature.getId() === featureId)) {
+  addSVG(
+    lon: number,
+    lat: number,
+    featureId: string,
+    SVG: string,
+    layerId = 'default'
+  ): void {
+    if (
+      this.getAllFeatures().some(
+        (feature: Feature) => feature.getId() === featureId
+      )
+    ) {
       console.log(`Already added feature: ${featureId}`);
       return;
     }
@@ -93,8 +100,12 @@ export default class CvMap {
    * @returns Feature array
    */
   getAllFeatures(): Feature[] {
-    const vectorSources: VectorSource[] = this.getAllLayerIds().map((layerId: string) => this.getLayer(layerId).getSource());
-    const featureArrays: Feature[][] = vectorSources.map((source: VectorSource) => source.getFeatures());
+    const vectorSources: VectorSource[] = this.getAllLayerIds().map(
+      (layerId: string) => this.getLayer(layerId).getSource()
+    );
+    const featureArrays: Feature[][] = vectorSources.map(
+      (source: VectorSource) => source.getFeatures()
+    );
     /** Return Feature[][] as Feature[] */
     return Array.prototype.concat.apply([], featureArrays);
   }
@@ -114,7 +125,9 @@ export default class CvMap {
    */
   getAllLayers(): VectorLayer[] {
     const allLayers: BaseLayer[] = this.map.getLayers().getArray();
-    return allLayers.filter((layer) => layer instanceof VectorLayer) as VectorLayer[];
+    return allLayers.filter(
+      (layer) => layer instanceof VectorLayer
+    ) as VectorLayer[];
   }
 
   /**
@@ -124,7 +137,9 @@ export default class CvMap {
    */
   getLayer(id: string): VectorLayer {
     const vectorLayers: any[] = this.getAllLayers();
-    return vectorLayers.find((layer: VectorLayer) => layer.getProperties().id === id);
+    return vectorLayers.find(
+      (layer: VectorLayer) => layer.getProperties().id === id
+    );
   }
 
   /**
@@ -133,13 +148,17 @@ export default class CvMap {
    */
   removeSVG(id: string): void {
     const allLayers: VectorLayer[] = this.getAllLayers();
-    const layerWithFeature: VectorLayer | undefined = allLayers.find((layer: VectorLayer) =>
-      layer
-        .getSource()
-        .getFeatures()
-        .some((feature: Feature) => feature.getId() === id)
+    const layerWithFeature: VectorLayer | undefined = allLayers.find(
+      (layer: VectorLayer) =>
+        layer
+          .getSource()
+          .getFeatures()
+          .some((feature: Feature) => feature.getId() === id)
     );
-    layerWithFeature && layerWithFeature.getSource().removeFeature(layerWithFeature.getSource().getFeatureById(id));
+    layerWithFeature &&
+      layerWithFeature
+        .getSource()
+        .removeFeature(layerWithFeature.getSource().getFeatureById(id));
   }
 
   /**
