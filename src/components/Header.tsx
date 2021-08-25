@@ -1,11 +1,10 @@
 import React from 'react';
-import { FunctionComponent } from 'react';
 
 import Navbar from 'react-bootstrap/Navbar';
-import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
-export const Header: FunctionComponent = () => {
+export const Header: React.FC = () => {
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand as={Link} to="/">Epic home page</Navbar.Brand>

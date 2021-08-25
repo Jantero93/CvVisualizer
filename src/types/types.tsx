@@ -7,6 +7,7 @@ export type Location = {
  * 
  */
 export type Person = {
+  id: string
   username: string;
   name?: string;
   age?: number;
@@ -15,6 +16,7 @@ export type Person = {
 };
 
 export type WorkExperience = {
+  id: string
   username: string, 
   beginTime: string;
   endTime?: string;
@@ -25,6 +27,7 @@ export type WorkExperience = {
 };
 
 export type Workplace = {
+  id: string
   description?: string;
   employees?: number;
   location: Location;

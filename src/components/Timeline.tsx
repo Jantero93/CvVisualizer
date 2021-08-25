@@ -1,7 +1,6 @@
 import React from 'react'
-import { FunctionComponent } from 'react'
 
-export const Timeline: FunctionComponent = () => {
+export const Timeline: React.FC = () => {
     return (
         <div>
             <h1>Timeline coming....</h1>

@@ -5,7 +5,13 @@
     "typescript",
     "typescriptreact",
   ],
+
+  "[typescript]": {"editor.formatOnSave": true},
+  
   "editor.codeActionsOnSave": {
+    "editor.formatOnSave": true,
     "source.fixAll.eslint": true,
+    "source.fixAll": true,
+    "source.fixAll.prettier": true
   },
 }

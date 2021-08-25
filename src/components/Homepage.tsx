@@ -1,6 +1,6 @@
 import React from 'react';
-import { FunctionComponent } from 'react';
-export const Homepage: FunctionComponent = () => {
+
+export const Homepage: React.FC = () => {
   return (
     <div>
       <h1>Home page...</h1>
