@@ -14,6 +14,8 @@ import { View } from 'ol';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 
+import { loggerError } from '../../utils/CommonUtils';
+
 export default class CvMap {
   readonly map: Map;
 
@@ -43,7 +45,7 @@ export default class CvMap {
    * Add Feature to layer
    * @param lon Longitude
    * @param lat Latitude
-   * @param featureId if of feature
+   * @param featureId id of feature
    * @param SVG SVG string
    * @param layerId Layer to add. If not given, feature will be added on 'default' layer
    */
@@ -59,7 +61,7 @@ export default class CvMap {
         (feature: Feature) => feature.getId() === featureId
       )
     ) {
-      console.log(`Already added feature: ${featureId}`);
+      loggerError(`Already added feature: ${featureId}`);
       return;
     }
 
@@ -80,11 +82,11 @@ export default class CvMap {
 
   /**
    * Add vector layer on map
-   * @param id of added layer
+   * @param id id of added layer
    */
   addLayer(id: string): void {
     if (this.getAllLayerIds().includes(id)) {
-      console.log(`Already added layer: ${id}`);
+      loggerError(`Already added layer: ${id}`);
       return;
     }
 
@@ -99,7 +101,7 @@ export default class CvMap {
    * Get all features from map
    * @returns Feature array
    */
-  getAllFeatures(): Feature[] {
+  private getAllFeatures(): Feature[] {
     const vectorSources: VectorSource[] = this.getAllLayerIds().map(
       (layerId: string) => this.getLayer(layerId).getSource()
     );
@@ -111,10 +113,10 @@ export default class CvMap {
   }
 
   /**
-   * Get all layer ids as string array
-   * @returns All Layer ids from map
+   * Get all layer ids from map
+   * @returns String array
    */
-  getAllLayerIds(): string[] {
+  private getAllLayerIds(): string[] {
     const vectorLayers: VectorLayer[] = this.getAllLayers();
     return vectorLayers.map((layer: VectorLayer) => layer.getProperties().id);
   }
@@ -123,7 +125,7 @@ export default class CvMap {
    * Return all vector layers from map
    * @returns Vector layer array
    */
-  getAllLayers(): VectorLayer[] {
+  private getAllLayers(): VectorLayer[] {
     const allLayers: BaseLayer[] = this.map.getLayers().getArray();
     return allLayers.filter(
       (layer) => layer instanceof VectorLayer
@@ -135,7 +137,7 @@ export default class CvMap {
    * @param id of wanter layer
    * @returns Vector layer
    */
-  getLayer(id: string): VectorLayer {
+  private getLayer(id: string): VectorLayer {
     const vectorLayers: any[] = this.getAllLayers();
     return vectorLayers.find(
       (layer: VectorLayer) => layer.getProperties().id === id
@@ -143,22 +145,38 @@ export default class CvMap {
   }
 
   /**
+   * Removes layer from map. All layer's features will be removed
+   * @param id id of layer to remove
+   */
+  removeLayer(id: string): void {
+    if (id === 'default') {
+      loggerError(`'default' layer can't be removed`);
+      return;
+    }
+
+    if (!this.getAllLayerIds().includes(id)) {
+      loggerError(`No layer on map: ${id}`);
+    }
+
+    this.map.removeLayer(this.getLayer(id));
+  }
+
+  /**
    * Remove SVG icon from map
-   * @param id of feature
+   * @param id id of feature
    */
   removeSVG(id: string): void {
-    const allLayers: VectorLayer[] = this.getAllLayers();
-    const layerWithFeature: VectorLayer | undefined = allLayers.find(
+    const layerWithFeature: VectorLayer = this.getAllLayers().find(
       (layer: VectorLayer) =>
         layer
           .getSource()
           .getFeatures()
           .some((feature: Feature) => feature.getId() === id)
-    );
-    layerWithFeature &&
-      layerWithFeature
-        .getSource()
-        .removeFeature(layerWithFeature.getSource().getFeatureById(id));
+    ) as VectorLayer;
+
+    layerWithFeature
+      .getSource()
+      .removeFeature(layerWithFeature.getSource().getFeatureById(id));
   }
 
   /**
@@ -176,7 +194,7 @@ export default class CvMap {
   }
 
   /**
-   * Set zoom level on view. 0 the most far out.
+   * Set zoom level on view. 0 the most far out. Doesn't change center view
    * @param zoomLevel
    */
   setZoomLevel(zoomLevel: number): void {

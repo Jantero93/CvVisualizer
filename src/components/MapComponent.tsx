@@ -21,16 +21,13 @@ export const MapComponent: React.FC = () => {
   }, []);
 
   const testButtonClicked = (): void => {
-    map?.setCenterView(0, 50);
-    map?.setZoomLevel(5);
-    map?.removeSVG('medicine');
+    map?.removeLayer('juttuja');
   };
 
   const addFeatureButtonClicked = (): void => {
     map?.addLayer('juttuja');
 
     map?.addSVG(0, 50, 'medicine', medicine, 'juttuja');
-    map?.getLayer('juttuja');
   };
 
   return (
