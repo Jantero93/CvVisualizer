@@ -1,10 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import medicine from '../map-icons/cardiogram.svg';
-import test from '../map-icons/makeup.svg';
 
 import 'ol/ol.css';
 import '../styles/MapComponent.css';
@@ -25,8 +22,6 @@ export const MapComponent: React.FC = () => {
   };
 
   const addFeatureButtonClicked = (): void => {
-    map?.addLayer('juttuja');
-
     map?.addSVG(0, 50, 'medicine', medicine, 'juttuja');
   };
 

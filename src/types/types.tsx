@@ -4,10 +4,10 @@ export type Location = {
 };
 
 /***
- * 
+ *
  */
 export type Person = {
-  id: string
+  id: string;
   username: string;
   name?: string;
   age?: number;
@@ -16,21 +16,19 @@ export type Person = {
 };
 
 export type WorkExperience = {
-  id: string
-  username: string, 
+  id: string;
+  username: string;
   beginTime: string;
   endTime?: string;
   title: string;
-  /**  */
   typeOfWork?: string;
   workplace: Workplace;
 };
 
 export type Workplace = {
-  id: string
+  id: string;
   description?: string;
   employees?: number;
   location: Location;
   name: string;
 };
-

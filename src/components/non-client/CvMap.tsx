@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
 import { Map } from 'ol';
 
-import BaseLayer from 'ol/layer/Base';
 import { defaults as defaultControls } from 'ol/control';
-import { fromLonLat /*,toLonLat*/ } from 'ol/proj';
+import { fromLonLat } from 'ol/proj';
 import Feature from 'ol/Feature';
 import Icon from 'ol/style/Icon';
 import OSM from 'ol/source/OSM';
@@ -14,25 +13,20 @@ import { View } from 'ol';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 
-import { loggerError } from '../../utils/CommonUtils';
-
 export default class CvMap {
   readonly map: Map;
 
+  /**
+   * @param targetDiv Div where map is initialized
+   */
   constructor(targetDiv: HTMLElement) {
-    const defaultLayer: VectorLayer = new VectorLayer({
-      source: new VectorSource()
-    });
-    defaultLayer.setProperties({ id: 'default' });
-
     this.map = new Map({
       controls: defaultControls(),
       target: targetDiv,
       layers: [
         new TileLayer({
           source: new OSM()
-        }),
-        defaultLayer
+        })
       ],
       view: new View({
         center: fromLonLat([37, 55]),
@@ -47,21 +41,26 @@ export default class CvMap {
    * @param lat Latitude
    * @param featureId id of feature
    * @param SVG SVG string
-   * @param layerId Layer to add. If not given, feature will be added on 'default' layer
+   * @param layerId Layer where SVG is added
    */
   addSVG(
     lon: number,
     lat: number,
     featureId: string,
     SVG: string,
-    layerId = 'default'
+    layerId: string
   ): void {
-    if (
-      this.getAllFeatures().some(
-        (feature: Feature) => feature.getId() === featureId
-      )
-    ) {
-      loggerError(`Already added feature: ${featureId}`);
+    const mapContainsFeature: boolean = this.getAllFeatures().some(
+      (feature: Feature) => feature.getId() === featureId
+    );
+
+    if (!this.getAllVectorLayerIds().includes(layerId)) {
+      console.error(`No layer: ${layerId}`);
+      return;
+    }
+
+    if (mapContainsFeature) {
+      console.error(`Already added feature: ${featureId}`);
       return;
     }
 
@@ -77,7 +76,7 @@ export default class CvMap {
     });
 
     newFeature.setStyle(featureStyle);
-    this.getLayer(layerId).getSource().addFeature(newFeature);
+    this.getVectorLayer(layerId).getSource().addFeature(newFeature);
   }
 
   /**
@@ -85,8 +84,8 @@ export default class CvMap {
    * @param id id of added layer
    */
   addLayer(id: string): void {
-    if (this.getAllLayerIds().includes(id)) {
-      loggerError(`Already added layer: ${id}`);
+    if (this.getAllVectorLayerIds().includes(id)) {
+      console.error(`Already added layer: ${id}`);
       return;
     }
 
@@ -102,11 +101,11 @@ export default class CvMap {
    * @returns Feature array
    */
   private getAllFeatures(): Feature[] {
-    const vectorSources: VectorSource[] = this.getAllLayerIds().map(
-      (layerId: string) => this.getLayer(layerId).getSource()
+    const allSources: VectorSource[] = this.getAllVectorLayers().map(
+      (layer: VectorLayer) => layer.getSource()
     );
-    const featureArrays: Feature[][] = vectorSources.map(
-      (source: VectorSource) => source.getFeatures()
+    const featureArrays: Feature[][] = allSources.map((source: VectorSource) =>
+      source.getFeatures()
     );
     /** Return Feature[][] as Feature[] */
     return Array.prototype.concat.apply([], featureArrays);
@@ -116,20 +115,21 @@ export default class CvMap {
    * Get all layer ids from map
    * @returns String array
    */
-  private getAllLayerIds(): string[] {
-    const vectorLayers: VectorLayer[] = this.getAllLayers();
-    return vectorLayers.map((layer: VectorLayer) => layer.getProperties().id);
+  private getAllVectorLayerIds(): string[] {
+    return this.getAllVectorLayers().map(
+      (layer: VectorLayer) => layer.getProperties().id
+    );
   }
 
   /**
    * Return all vector layers from map
    * @returns Vector layer array
    */
-  private getAllLayers(): VectorLayer[] {
-    const allLayers: BaseLayer[] = this.map.getLayers().getArray();
-    return allLayers.filter(
-      (layer) => layer instanceof VectorLayer
-    ) as VectorLayer[];
+  private getAllVectorLayers(): VectorLayer[] {
+    return this.map
+      .getLayers()
+      .getArray()
+      .filter((layer) => layer instanceof VectorLayer) as VectorLayer[];
   }
 
   /**
@@ -137,11 +137,10 @@ export default class CvMap {
    * @param id of wanter layer
    * @returns Vector layer
    */
-  private getLayer(id: string): VectorLayer {
-    const vectorLayers: any[] = this.getAllLayers();
-    return vectorLayers.find(
+  private getVectorLayer(id: string): VectorLayer {
+    return this.getAllVectorLayers().find(
       (layer: VectorLayer) => layer.getProperties().id === id
-    );
+    ) as VectorLayer;
   }
 
   /**
@@ -149,16 +148,12 @@ export default class CvMap {
    * @param id id of layer to remove
    */
   removeLayer(id: string): void {
-    if (id === 'default') {
-      loggerError(`'default' layer can't be removed`);
+    if (!this.getAllVectorLayerIds().includes(id)) {
+      console.error(`No layer on map: ${id}`);
       return;
     }
 
-    if (!this.getAllLayerIds().includes(id)) {
-      loggerError(`No layer on map: ${id}`);
-    }
-
-    this.map.removeLayer(this.getLayer(id));
+    this.map.removeLayer(this.getVectorLayer(id));
   }
 
   /**
@@ -166,7 +161,7 @@ export default class CvMap {
    * @param id id of feature
    */
   removeSVG(id: string): void {
-    const layerWithFeature: VectorLayer = this.getAllLayers().find(
+    const layerWithFeature: VectorLayer = this.getAllVectorLayers().find(
       (layer: VectorLayer) =>
         layer
           .getSource()
