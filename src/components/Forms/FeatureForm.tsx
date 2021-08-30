@@ -1,5 +1,4 @@
 import React from 'react';
-import { FunctionComponent } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -9,7 +8,10 @@ interface Props {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const FeatureForm: React.FC<Props> = ({showForm, setShowForm}: Props) => {
+export const FeatureForm: React.FC<Props> = ({
+  showForm,
+  setShowForm
+}: Props) => {
   return (
     <Form>
       <Form.Group>

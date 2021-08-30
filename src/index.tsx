@@ -3,12 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
+
+import { Provider } from 'react-redux';
+
+import { createStore } from 'redux';
+import { mapReducer } from './store/mapReducer';
+
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+const store = createStore(mapReducer, composeWithDevTools());
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

@@ -54,20 +54,19 @@ export default class CvMap {
       (feature: Feature) => feature.getId() === featureId
     );
 
-    if (!this.getAllVectorLayerIds().includes(layerId)) {
-      console.error(`No layer: ${layerId}`);
+    if (mapContainsFeature) {
+      console.error(`Already added feature: ${featureId}`);
       return;
     }
 
-    if (mapContainsFeature) {
-      console.error(`Already added feature: ${featureId}`);
+    if (!this.getAllVectorLayerIds().includes(layerId)) {
+      console.error(`No layer: ${layerId}`);
       return;
     }
 
     const newFeature: Feature = new Feature({
       geometry: new Point(fromLonLat([lon, lat]))
     });
-    newFeature.setId(featureId);
 
     const featureStyle: Style = new Style({
       image: new Icon({
@@ -76,6 +75,8 @@ export default class CvMap {
     });
 
     newFeature.setStyle(featureStyle);
+    newFeature.setId(featureId);
+
     this.getVectorLayer(layerId).getSource().addFeature(newFeature);
   }
 
@@ -83,7 +84,7 @@ export default class CvMap {
    * Add vector layer on map
    * @param id id of added layer
    */
-  addLayer(id: string): void {
+  addVectorLayer(id: string): void {
     if (this.getAllVectorLayerIds().includes(id)) {
       console.error(`Already added layer: ${id}`);
       return;
@@ -93,6 +94,7 @@ export default class CvMap {
       source: new VectorSource()
     });
     layer.setProperties({ id });
+
     this.map.addLayer(layer);
   }
 
@@ -101,14 +103,11 @@ export default class CvMap {
    * @returns Feature array
    */
   private getAllFeatures(): Feature[] {
-    const allSources: VectorSource[] = this.getAllVectorLayers().map(
-      (layer: VectorLayer) => layer.getSource()
-    );
-    const featureArrays: Feature[][] = allSources.map((source: VectorSource) =>
-      source.getFeatures()
+    const allFeatures: Feature[][] = this.getAllVectorLayers().map(
+      (layer: VectorLayer) => layer.getSource().getFeatures()
     );
     /** Return Feature[][] as Feature[] */
-    return Array.prototype.concat.apply([], featureArrays);
+    return Array.prototype.concat.apply([], allFeatures);
   }
 
   /**
