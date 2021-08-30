@@ -6,8 +6,6 @@ import medicine from '../map-icons/cardiogram.svg';
 
 import { setZoomAction } from '../store/mapReducer';
 
-import { Location, Workplace } from '../types/types';
-
 import 'ol/ol.css';
 import '../styles/MapComponent.css';
 
@@ -22,6 +20,7 @@ export const MapComponent: React.FC = () => {
   const mapZoom: number = useSelector<MapState, MapState['zoom']>(
     (state) => state.zoom
   );
+  /*
   const mapLocation: Location = useSelector<MapState, MapState['location']>(
     (state) => state.location
   );
@@ -30,12 +29,19 @@ export const MapComponent: React.FC = () => {
     MapState,
     MapState['workplaces']
   >((state) => state.workplaces);
+*/
 
   useEffect(() => {
-    const test = new CvMap(mapRef.current as HTMLElement);
-    setMap(test);
+    if (!map) {
+      setMap(new CvMap(mapRef.current as HTMLElement));
+      // eslint-disable-next-line
+      mapRef.current?.addEventListener('viewchange', (e: any) => {
+        dispatch({ payload: e.detail, type: 'SET_MAPVIEW' });
+      });
+    }
+
     map?.setZoomLevel(mapZoom);
-  }, [mapZoom]);
+  }, [map, dispatch, mapZoom]);
 
   const testButtonClicked = (): void => {
     map?.removeLayer('juttuja');
@@ -45,7 +51,6 @@ export const MapComponent: React.FC = () => {
   const addFeatureButtonClicked = (): void => {
     map?.addVectorLayer('juttuja');
     map?.addSVG(0, 50, 'medicine', medicine, 'juttuja');
-    console.log(mapWorkPlaces);
   };
 
   return (

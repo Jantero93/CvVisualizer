@@ -8,6 +8,8 @@
     "no-console": 1,
     "import/first": "error",
     "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
   "extends": [
     "react-app",

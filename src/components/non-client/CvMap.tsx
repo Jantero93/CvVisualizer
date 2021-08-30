@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import { Map } from 'ol';
+import { Map, MapEvent } from 'ol';
 
 import { defaults as defaultControls } from 'ol/control';
-import { fromLonLat } from 'ol/proj';
+import { fromLonLat, toLonLat } from 'ol/proj';
 import Feature from 'ol/Feature';
 import Icon from 'ol/style/Icon';
 import OSM from 'ol/source/OSM';
@@ -12,6 +12,7 @@ import Point from 'ol/geom/Point';
 import { View } from 'ol';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
+import { Coordinate } from 'ol/coordinate';
 
 export default class CvMap {
   readonly map: Map;
@@ -32,6 +33,20 @@ export default class CvMap {
         center: fromLonLat([37, 55]),
         zoom: 10
       })
+    });
+
+    this.map.on('moveend', (e: MapEvent) => {
+      targetDiv.dispatchEvent(
+        new CustomEvent('viewchange', {
+          detail: {
+            zoom: e.map.getView().getZoom(),
+            location: {
+              latitude: toLonLat(e.map.getView().getCenter() as Coordinate)[1],
+              longitude: toLonLat(e.map.getView().getCenter() as Coordinate)[0]
+            }
+          }
+        })
+      );
     });
   }
 
@@ -198,5 +213,10 @@ export default class CvMap {
         center: this.map.getView().getCenter()
       })
     );
+  }
+
+  zoomListener(e: MapEvent): number {
+    console.log('e asd', e.map.getView().getZoom());
+    return e.map.getView().getZoom() as number;
   }
 }

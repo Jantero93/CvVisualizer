@@ -32,3 +32,8 @@ export type Workplace = {
   location: Location;
   name: string;
 };
+
+export type MapView = {
+  location: Location;
+  zoom: number;
+};

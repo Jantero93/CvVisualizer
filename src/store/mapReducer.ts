@@ -1,4 +1,4 @@
-import { Location, Workplace } from '../types/types';
+import { Location, Workplace, MapView } from '../types/types';
 
 export interface MapState {
   location: Location;
@@ -12,14 +12,19 @@ export type removeWorkPlaceAction = {
   payload: Workplace;
 };
 export type setLocationAction = { type: 'SET_LOCATION'; payload: Location };
-export type setWorkPlaces = { type: 'SET_WORKPLACES'; payload: Workplace[] };
+export type setMapViewAction = { type: 'SET_MAPVIEW'; payload: MapView };
+export type setWorkPlacesAction = {
+  type: 'SET_WORKPLACES';
+  payload: Workplace[];
+};
 export type setZoomAction = { type: 'SET_ZOOM'; payload: number };
 
 export type MapActions =
   | addWorkPlaceAction
   | removeWorkPlaceAction
   | setLocationAction
-  | setWorkPlaces
+  | setMapViewAction
+  | setWorkPlacesAction
   | setZoomAction;
 
 const initialState: MapState = {
@@ -48,6 +53,13 @@ export const mapReducer = (
       return {
         ...state,
         location: action.payload
+      };
+
+    case 'SET_MAPVIEW':
+      return {
+        ...state,
+        location: action.payload.location,
+        zoom: action.payload.zoom
       };
 
     case 'SET_WORKPLACES':
