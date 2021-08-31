@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Map, MapEvent } from 'ol';
+import { Map, MapBrowserEvent, MapEvent } from 'ol';
 
 import { Coordinate } from 'ol/coordinate';
 import { defaults as defaultControls } from 'ol/control';
@@ -44,6 +44,16 @@ export default class CvMap {
               latitude: toLonLat(e.map.getView().getCenter() as Coordinate)[1],
               longitude: toLonLat(e.map.getView().getCenter() as Coordinate)[0]
             }
+          }
+        })
+      );
+    });
+
+    this.map.on('click', (e: MapBrowserEvent) => {
+      targetDiv.dispatchEvent(
+        new CustomEvent('click-coords', {
+          detail: {
+            location: toLonLat(e.coordinate)
           }
         })
       );

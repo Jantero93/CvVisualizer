@@ -1,12 +1,14 @@
 import { Location, Workplace, MapView } from '../../types/types';
 
 export interface MapState {
+  clickedCoords: Location;
   location: Location;
   workplaces: Workplace[];
   zoom: number;
 }
 
 const initialState: MapState = {
+  clickedCoords: { latitude: 0, longitude: 0 },
   location: { latitude: 61.48, longitude: 23.79 },
   workplaces: [],
   zoom: 13
@@ -16,6 +18,10 @@ export type AddWorkPlaceType = { type: 'ADD_WORKPLACE'; payload: Workplace };
 export type RemoveWorkPlaceType = {
   type: 'REMOVE_WORKPLACE';
   payload: Workplace;
+};
+export type SetMapClickCoordsType = {
+  type: 'LAST_CLICKED_COORDS';
+  payload: Location;
 };
 export type SetMapViewType = { type: 'SET_MAPVIEW'; payload: MapView };
 export type SetMapLocationType = { type: 'SET_LOCATION'; payload: Location };
@@ -28,6 +34,7 @@ export type SetZoomType = { type: 'SET_ZOOM'; payload: number };
 export type MapActions =
   | AddWorkPlaceType
   | RemoveWorkPlaceType
+  | SetMapClickCoordsType
   | SetMapViewType
   | SetMapLocationType
   | SetWorkPlaceType
@@ -47,6 +54,12 @@ export const mapReducer = (
         workplaces: state.workplaces.filter(
           (work: Workplace) => action.payload !== work
         )
+      };
+
+    case 'LAST_CLICKED_COORDS':
+      return {
+        ...state,
+        clickedCoords: action.payload
       };
 
     case 'SET_LOCATION':

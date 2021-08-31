@@ -7,7 +7,11 @@ import medicine from '../map-icons/cardiogram.svg';
 import { Location } from '../types/types';
 
 import { RootState } from '../store/reducers/rootReducer';
-import { setMapView, setMapZoom } from '../store/actions/mapActions';
+import {
+  setMapClickedCoords,
+  setMapView,
+  setMapZoom
+} from '../store/actions/mapActions';
 import { toggleWorkModal } from '../store/actions/modalActions';
 
 import { Button } from 'react-bootstrap';
@@ -40,12 +44,17 @@ const MapComponent: React.FC = () => {
   }, [map, mapLocation, mapZoom]);
 
   useEffect(() => {
+    /** init coords and zoom is set in mapReducer's initial state */
     setMap(new CvMap(mapRef.current as HTMLElement));
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mapRef.current?.addEventListener('viewchange', (e: any) => {
       const { location, zoom } = e.detail;
       dispatch(setMapView(location, zoom));
+    });
+
+    mapRef.current?.addEventListener('click-coords', (e: any) => {
+      dispatch(setMapClickedCoords(e.detail));
     });
   }, [dispatch]);
 

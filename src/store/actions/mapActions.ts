@@ -1,5 +1,18 @@
-import { SetMapViewType, SetZoomType } from '../reducers/mapReducer';
+import {
+  SetMapViewType,
+  SetZoomType,
+  SetMapClickCoordsType
+} from '../reducers/mapReducer';
 import { Location } from '../../types/types';
+
+export const setMapClickedCoords = (
+  clickedLocation: Location
+): SetMapClickCoordsType => {
+  return {
+    payload: clickedLocation,
+    type: 'LAST_CLICKED_COORDS'
+  };
+};
 
 export const setMapView = (
   location: Location,
