@@ -28,9 +28,9 @@ export type MapActions =
   | setZoomAction;
 
 const initialState: MapState = {
-  location: { latitude: 0, longitude: 0 },
+  location: { latitude: 61.48, longitude: 23.79 },
   workplaces: [],
-  zoom: 10
+  zoom: 13
 };
 
 export const mapReducer = (

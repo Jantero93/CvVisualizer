@@ -30,7 +30,7 @@ export default class CvMap {
         })
       ],
       view: new View({
-        center: fromLonLat([37, 55]),
+        center: fromLonLat([21, 61]),
         zoom: 10
       })
     });
@@ -213,10 +213,5 @@ export default class CvMap {
         center: this.map.getView().getCenter()
       })
     );
-  }
-
-  zoomListener(e: MapEvent): number {
-    console.log('e asd', e.map.getView().getZoom());
-    return e.map.getView().getZoom() as number;
   }
 }

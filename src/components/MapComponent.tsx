@@ -3,8 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import { MapState } from '../store/mapReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import medicine from '../map-icons/cardiogram.svg';
-
-import { setZoomAction } from '../store/mapReducer';
+import { Location } from '../types/types';
+import { setZoomAction, setLocationAction } from '../store/mapReducer';
 
 import 'ol/ol.css';
 import '../styles/MapComponent.css';
@@ -18,13 +18,14 @@ export const MapComponent: React.FC = () => {
   const dispatch = useDispatch();
 
   const mapZoom: number = useSelector<MapState, MapState['zoom']>(
-    (state) => state.zoom
-  );
-  /*
-  const mapLocation: Location = useSelector<MapState, MapState['location']>(
-    (state) => state.location
+    (state: MapState) => state.zoom
   );
 
+  const mapLocation: Location = useSelector<MapState, MapState['location']>(
+    (state: MapState) => state.location
+  );
+
+  /*
   const mapWorkPlaces: Workplace[] = useSelector<
     MapState,
     MapState['workplaces']
@@ -32,20 +33,22 @@ export const MapComponent: React.FC = () => {
 */
 
   useEffect(() => {
-    if (!map) {
-      setMap(new CvMap(mapRef.current as HTMLElement));
-      // eslint-disable-next-line
-      mapRef.current?.addEventListener('viewchange', (e: any) => {
-        dispatch({ payload: e.detail, type: 'SET_MAPVIEW' });
-      });
-    }
-
     map?.setZoomLevel(mapZoom);
-  }, [map, dispatch, mapZoom]);
+    map?.setCenterView(mapLocation.longitude, mapLocation.latitude);
+  }, [map, mapLocation, mapZoom]);
+
+  useEffect(() => {
+    setMap(new CvMap(mapRef.current as HTMLElement));
+
+    mapRef.current?.addEventListener('viewchange', (e: any) => {
+      console.log(`e.detail`, e.detail);
+      dispatch({ payload: e.detail, type: 'SET_MAPVIEW' });
+    });
+  }, [dispatch]);
 
   const testButtonClicked = (): void => {
     map?.removeLayer('juttuja');
-    dispatch({ payload: 20, type: 'SET_ZOOM' } as setZoomAction);
+    dispatch({ payload: 2, type: 'SET_ZOOM' } as setZoomAction);
   };
 
   const addFeatureButtonClicked = (): void => {
