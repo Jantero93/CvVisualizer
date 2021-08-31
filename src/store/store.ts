@@ -1,6 +1,7 @@
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore } from 'redux';
-import { mapReducer } from './mapReducer';
+import { rootReducer } from './reducers/rootReducer';
 
-const store = createStore(mapReducer, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools());
+
 export default store;

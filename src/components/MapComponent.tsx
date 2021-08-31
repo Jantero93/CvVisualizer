@@ -1,10 +1,15 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { MapState } from '../store/mapReducer';
+import { RootState } from '../store/reducers/rootReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import medicine from '../map-icons/cardiogram.svg';
 import { Location } from '../types/types';
-import { setZoomAction, setLocationAction } from '../store/mapReducer';
+import { setZoomAction } from '../store/reducers/mapReducer';
+
+import { Button } from 'react-bootstrap';
+import WorkplaceModal from './Forms/WorkplaceModal';
+
+import { toggleWorkModal } from '../store/reducers/modalReducer';
 
 import 'ol/ol.css';
 import '../styles/MapComponent.css';
@@ -17,20 +22,15 @@ const MapComponent: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const mapZoom: number = useSelector<MapState, MapState['zoom']>(
-    (state: MapState) => state.zoom
+  const mapZoom: number = useSelector((state: RootState) => state.map.zoom);
+
+  const mapLocation: Location = useSelector(
+    (state: RootState) => state.map.location
   );
 
-  const mapLocation: Location = useSelector<MapState, MapState['location']>(
-    (state: MapState) => state.location
+  const showWorkModal: boolean = useSelector(
+    (state: RootState) => state.modal.showWorkplaceModal
   );
-
-  /*
-  const mapWorkPlaces: Workplace[] = useSelector<
-    MapState,
-    MapState['workplaces']
-  >((state) => state.workplaces);
-*/
 
   useEffect(() => {
     map?.setZoomLevel(mapZoom);
@@ -40,6 +40,7 @@ const MapComponent: React.FC = () => {
   useEffect(() => {
     setMap(new CvMap(mapRef.current as HTMLElement));
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mapRef.current?.addEventListener('viewchange', (e: any) => {
       dispatch({ payload: e.detail, type: 'SET_MAPVIEW' });
     });
@@ -55,14 +56,22 @@ const MapComponent: React.FC = () => {
     map?.addSVG(0, 50, 'medicine', medicine, 'juttuja');
   };
 
+  const toggleModal = (): void => {
+    dispatch({ type: 'TOGGLE_WORK_MODAL' } as toggleWorkModal);
+  };
+
   return (
     <div id="map-container">
       <div className="tool-bar">
+        <Button variant="primary" onClick={toggleModal}>
+          Add Place
+        </Button>{' '}
         <button onClick={addFeatureButtonClicked}>lisaa ikoni</button>
         <button onClick={testButtonClicked}>Test Btn</button>
         <button onClick={addFeatureButtonClicked}>Show form component</button>
       </div>
       <div id="map" ref={mapRef} />
+      {showWorkModal && <WorkplaceModal />}
     </div>
   );
 };

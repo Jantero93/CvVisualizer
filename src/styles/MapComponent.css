@@ -7,9 +7,15 @@
 
 .tool-bar {
     height: max-content;
+    background-color: #282a35;
+}
+
+.tool-bar > button {
+    margin: 0.5em;
 }
 
 #map {
     height: 100%;
     width: 100%;
 }
+

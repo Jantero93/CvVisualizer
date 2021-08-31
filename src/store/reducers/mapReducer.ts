@@ -1,4 +1,4 @@
-import { Location, Workplace, MapView } from '../types/types';
+import { Location, Workplace, MapView } from '../../types/types';
 
 export interface MapState {
   location: Location;

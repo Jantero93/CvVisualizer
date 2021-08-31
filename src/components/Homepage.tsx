@@ -4,7 +4,6 @@ import '../styles/Homepage.css';
 
 import MapComponent from './MapComponent';
 import Timeline from './Timeline';
-import WorkplaceForm from './Forms/WorkplaceForm';
 
 import { Row, Col, Container } from 'react-bootstrap';
 
@@ -32,9 +31,7 @@ const Homepage: React.FC = () => {
           <MapComponent />
         </Row>
         <Row>
-          <Col>
-            <WorkplaceForm />
-          </Col>
+          <Col>Tähän tulee viewer</Col>
           <Col>
             <Timeline />
           </Col>
