@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { Map, MapEvent } from 'ol';
 
+import { Coordinate } from 'ol/coordinate';
 import { defaults as defaultControls } from 'ol/control';
 import { fromLonLat, toLonLat } from 'ol/proj';
 import Feature from 'ol/Feature';
@@ -12,7 +13,6 @@ import Point from 'ol/geom/Point';
 import { View } from 'ol';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
-import { Coordinate } from 'ol/coordinate';
 
 export default class CvMap {
   readonly map: Map;

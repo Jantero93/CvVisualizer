@@ -12,26 +12,26 @@ const initialState: MapState = {
   zoom: 13
 };
 
-export type addWorkPlaceAction = { type: 'ADD_WORKPLACE'; payload: Workplace };
-export type removeWorkPlaceAction = {
+export type AddWorkPlaceType = { type: 'ADD_WORKPLACE'; payload: Workplace };
+export type RemoveWorkPlaceType = {
   type: 'REMOVE_WORKPLACE';
   payload: Workplace;
 };
-export type setMapViewAction = { type: 'SET_MAPVIEW'; payload: MapView };
-export type setLocationAction = { type: 'SET_LOCATION'; payload: Location };
-export type setWorkPlacesAction = {
+export type SetMapViewType = { type: 'SET_MAPVIEW'; payload: MapView };
+export type SetMapLocationType = { type: 'SET_LOCATION'; payload: Location };
+export type SetWorkPlaceType = {
   type: 'SET_WORKPLACES';
   payload: Workplace[];
 };
-export type setZoomAction = { type: 'SET_ZOOM'; payload: number };
+export type SetZoomType = { type: 'SET_ZOOM'; payload: number };
 
 export type MapActions =
-  | addWorkPlaceAction
-  | removeWorkPlaceAction
-  | setMapViewAction
-  | setLocationAction
-  | setWorkPlacesAction
-  | setZoomAction;
+  | AddWorkPlaceType
+  | RemoveWorkPlaceType
+  | SetMapViewType
+  | SetMapLocationType
+  | SetWorkPlaceType
+  | SetZoomType;
 
 export const mapReducer = (
   state: MapState = initialState,

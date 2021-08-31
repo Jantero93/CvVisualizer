@@ -1,8 +1,10 @@
-import { setMapViewAction, setZoomAction } from '../reducers/mapReducer';
-
+import { SetMapViewType, SetZoomType } from '../reducers/mapReducer';
 import { Location } from '../../types/types';
 
-export const setView = (location: Location, zoom: number): setMapViewAction => {
+export const setMapView = (
+  location: Location,
+  zoom: number
+): SetMapViewType => {
   return {
     payload: {
       location,
@@ -12,7 +14,7 @@ export const setView = (location: Location, zoom: number): setMapViewAction => {
   };
 };
 
-export const setZoom = (zoom: number): setZoomAction => {
+export const setMapZoom = (zoom: number): SetZoomType => {
   return {
     payload: zoom,
     type: 'SET_ZOOM'
