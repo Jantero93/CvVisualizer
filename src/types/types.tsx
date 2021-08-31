@@ -3,9 +3,6 @@ export type Location = {
   longitude: number;
 };
 
-/***
- *
- */
 export type Person = {
   id: string;
   username: string;

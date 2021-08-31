@@ -1,22 +1,22 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { RootState } from '../store/reducers/rootReducer';
 import { useSelector, useDispatch } from 'react-redux';
+
 import medicine from '../map-icons/cardiogram.svg';
+
 import { Location } from '../types/types';
 
-import { setView, setZoom } from '../store/actions/mapActions';
+import { RootState } from '../store/reducers/rootReducer';
+import { setMapView, setMapZoom } from '../store/actions/mapActions';
+import { toggleWorkModal } from '../store/actions/modalActions';
 
 import { Button } from 'react-bootstrap';
-import WorkplaceModal from './Forms/WorkplaceModal';
 
-import { toggleWorkModal } from '../store/reducers/modalReducer';
-import { toggleWorkModalAction } from '../store/actions/modalActions';
+import CvMap from './non-client/CvMap';
+import WorkplaceModal from './modals/WorkplaceModal';
 
 import 'ol/ol.css';
 import '../styles/MapComponent.css';
-
-import CvMap from './non-client/CvMap';
 
 const MapComponent: React.FC = () => {
   const [map, setMap] = useState<CvMap>();
@@ -45,13 +45,13 @@ const MapComponent: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mapRef.current?.addEventListener('viewchange', (e: any) => {
       const { location, zoom } = e.detail;
-      dispatch(setView(location, zoom));
+      dispatch(setMapView(location, zoom));
     });
   }, [dispatch]);
 
   const testButtonClicked = (): void => {
     map?.removeLayer('juttuja');
-    dispatch(setZoom(4));
+    dispatch(setMapZoom(4));
   };
 
   const addFeatureButtonClicked = (): void => {
@@ -60,7 +60,7 @@ const MapComponent: React.FC = () => {
   };
 
   const toggleModal = (): void => {
-    dispatch(toggleWorkModalAction());
+    dispatch(toggleWorkModal());
   };
 
   return (

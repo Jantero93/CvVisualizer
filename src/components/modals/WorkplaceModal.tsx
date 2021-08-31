@@ -1,16 +1,15 @@
 import React from 'react';
-
-import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { toggleWorkModal } from '../../store/reducers/modalReducer';
-import { toggleWorkModalAction } from '../../store/actions/modalActions';
+import { Modal } from 'react-bootstrap';
+
+import { toggleWorkModal } from '../../store/actions/modalActions';
 
 const WorkplaceModal: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    dispatch(toggleWorkModalAction());
+    dispatch(toggleWorkModal());
   };
 
   return (

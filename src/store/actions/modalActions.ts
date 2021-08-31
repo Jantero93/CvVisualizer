@@ -1,13 +1,16 @@
-import { toggleJobModal, toggleWorkModal } from '../reducers/modalReducer';
+import {
+  ToggleJobModalType,
+  ToggleWorkModalType
+} from '../reducers/modalReducer';
 
-export const toggleWorkModalAction = (): toggleWorkModal => {
+export const toggleJobModal = (): ToggleJobModalType => {
   return {
-    type: 'TOGGLE_WORK_MODAL'
+    type: 'TOGGLE_JOB_MODAL'
   };
 };
 
-export const toggleJobModalAction = (): toggleJobModal => {
+export const toggleWorkModal = (): ToggleWorkModalType => {
   return {
-    type: 'TOGGLE_JOB_MODAL'
+    type: 'TOGGLE_WORK_MODAL'
   };
 };
