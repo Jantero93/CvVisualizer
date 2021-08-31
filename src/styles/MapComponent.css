@@ -8,10 +8,11 @@
 .tool-bar {
     height: max-content;
     background-color: #282a35;
+    padding: 1em;
 }
 
-.tool-bar > button {
-    margin: 0.5em;
+.tool-bar >  * {
+    margin-left: 0.5em;
 }
 
 #map {

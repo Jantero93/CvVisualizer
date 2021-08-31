@@ -4,12 +4,14 @@ import { RootState } from '../store/reducers/rootReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import medicine from '../map-icons/cardiogram.svg';
 import { Location } from '../types/types';
-import { setZoomAction } from '../store/reducers/mapReducer';
+
+import { setView, setZoom } from '../store/actions/mapActions';
 
 import { Button } from 'react-bootstrap';
 import WorkplaceModal from './Forms/WorkplaceModal';
 
 import { toggleWorkModal } from '../store/reducers/modalReducer';
+import { toggleWorkModalAction } from '../store/actions/modalActions';
 
 import 'ol/ol.css';
 import '../styles/MapComponent.css';
@@ -42,13 +44,14 @@ const MapComponent: React.FC = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mapRef.current?.addEventListener('viewchange', (e: any) => {
-      dispatch({ payload: e.detail, type: 'SET_MAPVIEW' });
+      const { location, zoom } = e.detail;
+      dispatch(setView(location, zoom));
     });
   }, [dispatch]);
 
   const testButtonClicked = (): void => {
     map?.removeLayer('juttuja');
-    dispatch({ payload: 2, type: 'SET_ZOOM' } as setZoomAction);
+    dispatch(setZoom(4));
   };
 
   const addFeatureButtonClicked = (): void => {
@@ -57,7 +60,7 @@ const MapComponent: React.FC = () => {
   };
 
   const toggleModal = (): void => {
-    dispatch({ type: 'TOGGLE_WORK_MODAL' } as toggleWorkModal);
+    dispatch(toggleWorkModalAction());
   };
 
   return (
