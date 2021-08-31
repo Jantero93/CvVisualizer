@@ -11,7 +11,7 @@ import '../styles/MapComponent.css';
 
 import CvMap from './non-client/CvMap';
 
-export const MapComponent: React.FC = () => {
+const MapComponent: React.FC = () => {
   const [map, setMap] = useState<CvMap>();
   const mapRef = useRef<HTMLDivElement>(null);
 
@@ -41,7 +41,6 @@ export const MapComponent: React.FC = () => {
     setMap(new CvMap(mapRef.current as HTMLElement));
 
     mapRef.current?.addEventListener('viewchange', (e: any) => {
-      console.log(`e.detail`, e.detail);
       dispatch({ payload: e.detail, type: 'SET_MAPVIEW' });
     });
   }, [dispatch]);
@@ -58,12 +57,14 @@ export const MapComponent: React.FC = () => {
 
   return (
     <div id="map-container">
-      <div id="map" ref={mapRef} />
       <div className="tool-bar">
         <button onClick={addFeatureButtonClicked}>lisaa ikoni</button>
         <button onClick={testButtonClicked}>Test Btn</button>
         <button onClick={addFeatureButtonClicked}>Show form component</button>
       </div>
+      <div id="map" ref={mapRef} />
     </div>
   );
 };
+
+export default MapComponent;

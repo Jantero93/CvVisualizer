@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 
-export const Header: React.FC = () => {
+const Header: React.FC = () => {
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand as={Link} to="/">
@@ -20,3 +20,5 @@ export const Header: React.FC = () => {
     </Navbar>
   );
 };
+
+export default Header;

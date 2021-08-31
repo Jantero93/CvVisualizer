@@ -6,13 +6,19 @@ export interface MapState {
   zoom: number;
 }
 
+const initialState: MapState = {
+  location: { latitude: 61.48, longitude: 23.79 },
+  workplaces: [],
+  zoom: 13
+};
+
 export type addWorkPlaceAction = { type: 'ADD_WORKPLACE'; payload: Workplace };
 export type removeWorkPlaceAction = {
   type: 'REMOVE_WORKPLACE';
   payload: Workplace;
 };
-export type setLocationAction = { type: 'SET_LOCATION'; payload: Location };
 export type setMapViewAction = { type: 'SET_MAPVIEW'; payload: MapView };
+export type setLocationAction = { type: 'SET_LOCATION'; payload: Location };
 export type setWorkPlacesAction = {
   type: 'SET_WORKPLACES';
   payload: Workplace[];
@@ -22,16 +28,10 @@ export type setZoomAction = { type: 'SET_ZOOM'; payload: number };
 export type MapActions =
   | addWorkPlaceAction
   | removeWorkPlaceAction
-  | setLocationAction
   | setMapViewAction
+  | setLocationAction
   | setWorkPlacesAction
   | setZoomAction;
-
-const initialState: MapState = {
-  location: { latitude: 61.48, longitude: 23.79 },
-  workplaces: [],
-  zoom: 13
-};
 
 export const mapReducer = (
   state: MapState = initialState,

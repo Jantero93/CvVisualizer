@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Homepage } from './components/Homepage';
-import { Header } from './components/Header';
-import { MapComponent } from './components/MapComponent';
-import { Timeline } from './components/Timeline';
+import Homepage from './components/Homepage';
+import Header from './components/Header';
+import MapComponent from './components/MapComponent';
+import Timeline from './components/Timeline';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
