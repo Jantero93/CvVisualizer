@@ -17,7 +17,7 @@ const WorkplaceModal: React.FC = () => {
   const [address, setAddress] = useState<string>('');
   const [size, setSize] = useState<string>('tiny');
   const [description, setDescription] = useState<string>('');
-  const [addresHelper, setAddressHelper] = useState<string>('');
+  const [addressHelper, setAddressHelper] = useState<string>('');
 
   const dispatch = useDispatch();
 
@@ -25,14 +25,15 @@ const WorkplaceModal: React.FC = () => {
     e.preventDefault();
 
     if (!name.length) {
-      console.error('No name');
       return;
     }
 
     try {
-      const response: GeocodeResult = await getLocation(address);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const response: GeocodeResult[] = await getLocation(address);
+      // eslint-disable-next-line no-console
     } catch (error) {
-      console.log(`error`, error);
+      console.log(error);
     }
 
     const newWork: Workplace = {
@@ -49,15 +50,20 @@ const WorkplaceModal: React.FC = () => {
   const handleUnFocus = async (
     e: FocusEvent<HTMLInputElement>
   ): Promise<void> => {
-    if (!e.target.value || e.target.value.length < 6) {
-      setAddressHelper('Minimum 6 characters');
+    if (!e.target.value || e.target.value.length < 4) {
+      setAddressHelper('Minimum 4 characters');
       return;
     }
     setAddressHelper('');
-    const response: GeocodeResult = await getLocation(e.target.value);
+    const response: GeocodeResult[] = await getLocation(e.target.value);
 
-    response?.longName && setAddress(response.longName);
-    setAddressHelper(response?.longName ? '' : 'No location found');
+    if (!response.length) {
+      setAddressHelper('No location');
+    } else if (response.length === 1) {
+      setAddress(response[0].longName as string);
+    } else {
+      setAddressHelper('Too many results');
+    }
   };
 
   return (
@@ -100,7 +106,7 @@ const WorkplaceModal: React.FC = () => {
               onChange={(e) => setAddress(e.target.value)}
               onBlur={handleUnFocus}
             />
-            <Form.Text muted>{addresHelper}</Form.Text>
+            <Form.Text muted>{addressHelper}</Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGridAddress2">
