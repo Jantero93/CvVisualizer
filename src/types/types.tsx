@@ -4,7 +4,7 @@ export type Location = {
 };
 
 export type Person = {
-  id: string;
+  id?: string;
   username: string;
   name?: string;
   age?: number;
@@ -13,7 +13,7 @@ export type Person = {
 };
 
 export type WorkExperience = {
-  id: string;
+  id?: string;
   username: string;
   beginTime: string;
   endTime?: string;
@@ -23,11 +23,11 @@ export type WorkExperience = {
 };
 
 export type Workplace = {
-  id: string;
-  description?: string;
-  employees?: number;
-  location: Location;
+  id?: string;
   name: string;
+  description?: string;
+  location: Location;
+  size?: string;
 };
 
 export type MapView = {

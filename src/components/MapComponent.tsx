@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import medicine from '../map-icons/cardiogram.svg';
 
-import { Location } from '../types/types';
+import { Location, Workplace } from '../types/types';
 
 import { RootState } from '../store/reducers/rootReducer';
 import {
@@ -29,13 +29,14 @@ const MapComponent: React.FC = () => {
   const dispatch = useDispatch();
 
   const mapZoom: number = useSelector((state: RootState) => state.map.zoom);
-
   const mapLocation: Location = useSelector(
     (state: RootState) => state.map.location
   );
-
   const showWorkModal: boolean = useSelector(
     (state: RootState) => state.modal.showWorkplaceModal
+  );
+  const mapWorkPlaces: Workplace[] = useSelector(
+    (state: RootState) => state.map.workplaces
   );
 
   useEffect(() => {

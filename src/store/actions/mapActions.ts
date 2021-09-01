@@ -1,9 +1,17 @@
 import {
+  AddWorkPlaceType,
   SetMapViewType,
   SetZoomType,
   SetMapClickCoordsType
 } from '../reducers/mapReducer';
-import { Location } from '../../types/types';
+import { Location, Workplace } from '../../types/types';
+
+export const addWorkPlace = (work: Workplace): AddWorkPlaceType => {
+  return {
+    payload: work,
+    type: 'ADD_WORKPLACE'
+  };
+};
 
 export const setMapClickedCoords = (
   clickedLocation: Location

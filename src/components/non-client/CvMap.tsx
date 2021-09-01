@@ -21,6 +21,13 @@ export default class CvMap {
    * @param targetDiv Div where map is initialized
    */
   constructor(targetDiv: HTMLElement) {
+    const defaultLayer: VectorLayer = new VectorLayer({
+      source: new VectorSource()
+    });
+    defaultLayer.setProperties({
+      id: 'default'
+    });
+
     this.map = new Map({
       controls: defaultControls(),
       target: targetDiv,
@@ -34,6 +41,8 @@ export default class CvMap {
         zoom: 10
       })
     });
+
+    this.map.addLayer(defaultLayer);
 
     this.map.on('moveend', (e: MapEvent) => {
       targetDiv.dispatchEvent(
