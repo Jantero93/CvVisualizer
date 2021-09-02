@@ -70,7 +70,7 @@ export default class CvMap {
   }
 
   /**
-   * Add Feature to layer
+   * Add SVG (feature) to layer
    * @param lon Longitude
    * @param lat Latitude
    * @param featureId id of feature
@@ -174,6 +174,14 @@ export default class CvMap {
     return this.getAllVectorLayers().find(
       (layer: VectorLayer) => layer.getProperties().id === id
     ) as VectorLayer;
+  }
+  /**
+   * Removes all SVGs (map features) from map
+   */
+  removeAllSVGs(): void {
+    this.getAllFeatures().forEach((feature: Feature) =>
+      this.removeSVG(feature.getId() as string)
+    );
   }
 
   /**

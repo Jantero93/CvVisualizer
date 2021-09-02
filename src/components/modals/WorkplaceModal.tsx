@@ -9,7 +9,6 @@ import { toggleWorkModal } from '../../store/actions/modalActions';
 import { addWorkPlace } from '../../store/actions/mapActions';
 
 import { getLocation } from '../../services/MapServices';
-
 import { GeocodeResult } from '../../services/Types';
 
 const WorkplaceModal: React.FC = () => {
@@ -18,39 +17,40 @@ const WorkplaceModal: React.FC = () => {
   const [size, setSize] = useState<string>('tiny');
   const [description, setDescription] = useState<string>('');
   const [addressHelper, setAddressHelper] = useState<string>('');
+  const [apiresponse, setApiresponse] = useState<GeocodeResult | null>(null);
 
   const dispatch = useDispatch();
 
   const handleSave = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
 
-    if (!name.length) {
+    if (!apiresponse || !name.length) {
       return;
     }
 
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const response: GeocodeResult[] = await getLocation(address);
-      // eslint-disable-next-line no-console
+      const newWork: Workplace = {
+        location: {
+          latitude: apiresponse.location?.latitude as number,
+          longitude: apiresponse.location?.longitude as number
+        },
+        name,
+        description,
+        size,
+        id: (Math.random() * (10000000 - 3) + 3).toString()
+      };
+
+      dispatch(addWorkPlace(newWork));
+      dispatch(toggleWorkModal());
     } catch (error) {
       console.log(error);
     }
-
-    const newWork: Workplace = {
-      location: { latitude: 0, longitude: 0 },
-      name,
-      description,
-      size
-    };
-
-    dispatch(addWorkPlace(newWork));
-    dispatch(toggleWorkModal());
   };
 
   const handleUnFocus = async (
     e: FocusEvent<HTMLInputElement>
   ): Promise<void> => {
-    if (!e.target.value || e.target.value.length < 4) {
+    if (e.target.value.length < 4) {
       setAddressHelper('Minimum 4 characters');
       return;
     }
@@ -58,11 +58,14 @@ const WorkplaceModal: React.FC = () => {
     const response: GeocodeResult[] = await getLocation(e.target.value);
 
     if (!response.length) {
-      setAddressHelper('No location');
+      setAddressHelper('No street address');
+      setApiresponse(null);
     } else if (response.length === 1) {
       setAddress(response[0].longName as string);
+      setApiresponse(response[0]);
     } else {
       setAddressHelper('Too many results');
+      setApiresponse(null);
     }
   };
 

@@ -54,10 +54,25 @@ const MapComponent: React.FC = () => {
       dispatch(setMapView(location, zoom));
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mapRef.current?.addEventListener('click-coords', (e: any) => {
       dispatch(setMapClickedCoords(e.detail));
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    map?.removeAllFeatures();
+    mapWorkPlaces.forEach((workplace: Workplace) => {
+      const { latitude, longitude } = workplace.location;
+      map?.addSVG(
+        longitude,
+        latitude,
+        workplace.id as string,
+        medicine,
+        'default'
+      );
+    });
+  }, [mapWorkPlaces]);
 
   const testButtonClicked = (): void => {
     map?.removeLayer('juttuja');

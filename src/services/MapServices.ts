@@ -15,7 +15,7 @@ export const getLocation = async (
   );
 
   return filtered.map((result: any) => {
-    const { lat, lng } = result?.geometry?.location || 0;
+    const { lat, lng } = result?.geometry?.location;
     return {
       location: {
         latitude: lat,
