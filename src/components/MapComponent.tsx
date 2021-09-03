@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import medicine from '../map-icons/cardiogram.svg';
+import WorkplaceIcon from '../map-icons/workplace.svg';
 
 import { Location, Workplace } from '../types/types';
 
@@ -61,18 +61,18 @@ const MapComponent: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    map?.removeAllFeatures();
+    map?.removeAllSVGs();
     mapWorkPlaces.forEach((workplace: Workplace) => {
       const { latitude, longitude } = workplace.location;
       map?.addSVG(
         longitude,
         latitude,
         workplace.id as string,
-        medicine,
+        WorkplaceIcon,
         'default'
       );
     });
-  }, [mapWorkPlaces]);
+  }, [mapWorkPlaces, map]);
 
   const testButtonClicked = (): void => {
     map?.removeLayer('juttuja');
@@ -81,7 +81,7 @@ const MapComponent: React.FC = () => {
 
   const addFeatureButtonClicked = (): void => {
     map?.addVectorLayer('juttuja');
-    map?.addSVG(0, 50, 'medicine', medicine, 'juttuja');
+    map?.addSVG(0, 50, 'medicine', WorkplaceIcon, 'juttuja');
   };
 
   const toggleModal = (): void => {
@@ -93,7 +93,7 @@ const MapComponent: React.FC = () => {
       <div className="tool-bar">
         <Button variant="primary" onClick={toggleModal}>
           Add Place
-        </Button>{' '}
+        </Button>
         <button onClick={addFeatureButtonClicked}>lisaa ikoni</button>
         <button onClick={testButtonClicked}>Test Btn</button>
         <button onClick={addFeatureButtonClicked}>Show form component</button>
