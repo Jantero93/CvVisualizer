@@ -60,10 +60,15 @@ export default class CvMap {
     });
 
     this.map.on('click', (e: MapBrowserEvent) => {
+      const clickedFeatureId: string | undefined = e.map
+        ?.getFeaturesAtPixel(e.pixel)[0]
+        ?.getId() as string;
+
       targetDiv.dispatchEvent(
-        new CustomEvent('click-coords', {
+        new CustomEvent('click-map', {
           detail: {
-            location: toLonLat(e.coordinate)
+            location: toLonLat(e.coordinate),
+            featureId: clickedFeatureId
           }
         })
       );

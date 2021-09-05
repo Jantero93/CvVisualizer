@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 /** Reducer, actions */
 import { RootState } from '../store/reducers/rootReducer';
-import { setMapClickedCoords, setMapView } from '../store/actions/mapActions';
+import {
+  setMapClickedCoords,
+  setMapClickedFeature,
+  setMapView
+} from '../store/actions/mapActions';
 import { toggleWorkModal } from '../store/actions/modalActions';
 
 /** Types */
@@ -61,10 +65,11 @@ const MapComponent: React.FC = () => {
       dispatch(setMapView(location, zoom));
     });
 
-    /** Get coordinates from map click */
+    /** Get coordinates & feature from map click */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mapRef.current?.addEventListener('click-coords', (e: any) => {
-      dispatch(setMapClickedCoords(e.detail));
+    mapRef.current?.addEventListener('click-map', (e: any) => {
+      dispatch(setMapClickedCoords(e.detail.location));
+      dispatch(setMapClickedFeature(e.detail.featureId));
     });
   }, [dispatch]);
 

@@ -2,6 +2,7 @@ import { Location, Workplace, MapView } from '../../types/types';
 
 export interface MapState {
   clickedCoords: Location;
+  clickedFeatureId?: string, 
   location: Location;
   sizeChanged: boolean;
   workplaces: Workplace[];
@@ -10,6 +11,7 @@ export interface MapState {
 
 const initialState: MapState = {
   clickedCoords: { latitude: 0, longitude: 0 },
+  clickedFeatureId: undefined,
   sizeChanged: false,
   location: { latitude: 61.48, longitude: 23.79 },
   workplaces: [],
@@ -26,6 +28,10 @@ export type SetMapClickCoordsType = {
   type: 'LAST_CLICKED_COORDS';
   payload: Location;
 };
+export type SetMapClickFeatureType = {
+  type: 'LAST_CLICKED_FEATURE_ID';
+  payload: string;
+};
 export type SetMapViewType = { type: 'SET_MAPVIEW'; payload: MapView };
 export type SetMapLocationType = { type: 'SET_LOCATION'; payload: Location };
 export type SetWorkPlaceType = {
@@ -39,6 +45,7 @@ export type MapActions =
   | MapSizeHasChangedType
   | RemoveWorkPlaceType
   | SetMapClickCoordsType
+  | SetMapClickFeatureType
   | SetMapViewType
   | SetMapLocationType
   | SetWorkPlaceType
@@ -68,6 +75,12 @@ export const mapReducer = (
         ...state,
         clickedCoords: action.payload
       };
+
+      case 'LAST_CLICKED_FEATURE_ID':
+        return {
+          ...state,
+          clickedFeatureId: action.payload
+        }
 
     case 'SET_LOCATION':
       return {
