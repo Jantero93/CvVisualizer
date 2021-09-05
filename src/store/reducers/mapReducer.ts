@@ -2,7 +2,7 @@ import { Location, Workplace, MapView } from '../../types/types';
 
 export interface MapState {
   clickedCoords: Location;
-  clickedFeatureId?: string, 
+  clickedFeatureId?: string;
   location: Location;
   sizeChanged: boolean;
   workplaces: Workplace[];
@@ -19,7 +19,10 @@ const initialState: MapState = {
 };
 
 export type AddWorkPlaceType = { type: 'ADD_WORKPLACE'; payload: Workplace };
-export type MapSizeHasChangedType = { type: 'MAP_SIZE_CHANGED'; payload: boolean}
+export type MapSizeHasChangedType = {
+  type: 'MAP_SIZE_CHANGED';
+  payload: boolean;
+};
 export type RemoveWorkPlaceType = {
   type: 'REMOVE_WORKPLACE';
   payload: Workplace;
@@ -60,7 +63,7 @@ export const mapReducer = (
       return { ...state, workplaces: state.workplaces.concat(action.payload) };
 
     case 'MAP_SIZE_CHANGED':
-      return { ...state, sizeChanged: !state.sizeChanged }
+      return { ...state, sizeChanged: !state.sizeChanged };
 
     case 'REMOVE_WORKPLACE':
       return {
@@ -76,11 +79,11 @@ export const mapReducer = (
         clickedCoords: action.payload
       };
 
-      case 'LAST_CLICKED_FEATURE_ID':
-        return {
-          ...state,
-          clickedFeatureId: action.payload
-        }
+    case 'LAST_CLICKED_FEATURE_ID':
+      return {
+        ...state,
+        clickedFeatureId: action.payload
+      };
 
     case 'SET_LOCATION':
       return {

@@ -4,7 +4,7 @@ import {
   SetMapClickCoordsType,
   SetMapClickFeatureType,
   SetMapViewType,
-  SetZoomType,
+  SetZoomType
 } from '../reducers/mapReducer';
 import { Location, Workplace } from '../../types/types';
 
@@ -21,8 +21,8 @@ export const mapSizeHasChanged = (
   return {
     type: 'MAP_SIZE_CHANGED',
     payload: hasChanged
-  }
-}
+  };
+};
 
 export const setMapClickedCoords = (
   clickedLocation: Location
