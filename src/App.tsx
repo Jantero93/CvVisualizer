@@ -1,12 +1,14 @@
+/** React, Router */
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Homepage from './components/Homepage';
+/** Components */
 import Header from './components/Header';
+import Homepage from './components/Homepage';
 import MapComponent from './components/MapComponent';
 import Timeline from './components/Timeline';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+/** Css */
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

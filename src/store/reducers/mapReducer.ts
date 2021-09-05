@@ -3,18 +3,21 @@ import { Location, Workplace, MapView } from '../../types/types';
 export interface MapState {
   clickedCoords: Location;
   location: Location;
+  sizeChanged: boolean;
   workplaces: Workplace[];
   zoom: number;
 }
 
 const initialState: MapState = {
   clickedCoords: { latitude: 0, longitude: 0 },
+  sizeChanged: false,
   location: { latitude: 61.48, longitude: 23.79 },
   workplaces: [],
   zoom: 13
 };
 
 export type AddWorkPlaceType = { type: 'ADD_WORKPLACE'; payload: Workplace };
+export type MapSizeHasChangedType = { type: 'MAP_SIZE_CHANGED'; payload: boolean}
 export type RemoveWorkPlaceType = {
   type: 'REMOVE_WORKPLACE';
   payload: Workplace;
@@ -33,6 +36,7 @@ export type SetZoomType = { type: 'SET_ZOOM'; payload: number };
 
 export type MapActions =
   | AddWorkPlaceType
+  | MapSizeHasChangedType
   | RemoveWorkPlaceType
   | SetMapClickCoordsType
   | SetMapViewType
@@ -47,6 +51,9 @@ export const mapReducer = (
   switch (action.type) {
     case 'ADD_WORKPLACE':
       return { ...state, workplaces: state.workplaces.concat(action.payload) };
+
+    case 'MAP_SIZE_CHANGED':
+      return { ...state, sizeChanged: !state.sizeChanged }
 
     case 'REMOVE_WORKPLACE':
       return {

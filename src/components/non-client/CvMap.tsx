@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { Map, MapBrowserEvent, MapEvent } from 'ol';
 
+/** OpenLayers */
 import { Coordinate } from 'ol/coordinate';
 import { defaults as defaultControls } from 'ol/control';
 import { fromLonLat, toLonLat } from 'ol/proj';
@@ -10,9 +11,9 @@ import OSM from 'ol/source/OSM';
 import Style from 'ol/style/Style';
 import TileLayer from 'ol/layer/Tile';
 import Point from 'ol/geom/Point';
-import { View } from 'ol';
-import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import { View } from 'ol';
 
 export default class CvMap {
   readonly map: Map;
@@ -193,7 +194,6 @@ export default class CvMap {
       console.error(`No layer on map: ${id}`);
       return;
     }
-
     this.map.removeLayer(this.getVectorLayer(id));
   }
 
@@ -240,5 +240,13 @@ export default class CvMap {
         center: this.map.getView().getCenter()
       })
     );
+  }
+
+  /**
+   * Force a recalculation of the map viewport size.
+   * This should be called when third-party code changes the size of the map viewport.
+   */
+  updateSize(): void {
+    this.map.updateSize();
   }
 }

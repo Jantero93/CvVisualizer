@@ -1,55 +1,50 @@
-import React from 'react';
+/** React, Redux */
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
+/** Reducers, actions */
+import { mapSizeHasChanged } from '../store/actions/mapActions';
+
+/** Components */
 import MapComponent from './MapComponent';
+import Split from 'split.js';
 import Timeline from './Timeline';
 
-import { Row, Col, Container } from 'react-bootstrap';
+/** Css */
 import '../styles/Homepage.css';
 
-const containerStyle = {
-  height: '75%',
-  width: '100%',
-  marginLeft: 0,
-  marginRight: 0,
-  paddingRight: 0,
-  paddingLeft: 0
-};
-
-const rowStyle = {
-  height: '75%',
-  width: '100%',
-  marginLeft: 0,
-  marginRight: 0
-};
-
-const colStyle = {
-  height: '100%',
-  width: '100%',
-  marginLeft: 0,
-  marginRight: 0,
-  paddingRight: 0,
-  paddingLeft: 0
-};
-
 const Homepage: React.FC = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    Split(['#split-row-top', '#split-row-bottom'], {
+      direction: 'vertical',
+      onDrag: () => dispatch(mapSizeHasChanged(true)),
+      onDragEnd: () => dispatch(mapSizeHasChanged(true))
+    });
+
+    Split(['#split-col-left', '#split-col-right'], {});
+  }, [dispatch]);
+
   return (
     <div className="home-page">
-      <Container fluid style={containerStyle}>
-        <Row style={rowStyle}>
+      <div className="main-split">
+        <div id="split-row-top">
           <MapComponent />
-        </Row>
-        <Row style={rowStyle}>
-          <Col style={colStyle}>
-            {' '}
-            <div style={{ border: '1px solid' }}>
-              Tähän tulee viewer <br /> asd
+        </div>
+        <div id="split-row-bottom">
+          <div className="split-nested">
+            <div id="split-col-left">
+              <div style={{ border: '1px solid' }}>
+                Tähän tulee viewer <br /> asd
+              </div>
             </div>
-          </Col>
-          <Col style={colStyle}>
-            <Timeline />
-          </Col>
-        </Row>
-      </Container>
+            <div id="split-col-right">
+              <Timeline />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

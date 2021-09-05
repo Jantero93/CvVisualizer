@@ -1,3 +1,4 @@
+/** React */
 import React from 'react';
 
 const Timeline: React.FC = () => {

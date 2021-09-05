@@ -1,5 +1,6 @@
 import {
   AddWorkPlaceType,
+  MapSizeHasChangedType,
   SetMapViewType,
   SetZoomType,
   SetMapClickCoordsType
@@ -12,6 +13,15 @@ export const addWorkPlace = (work: Workplace): AddWorkPlaceType => {
     type: 'ADD_WORKPLACE'
   };
 };
+
+export const mapSizeHasChanged = (
+  hasChanged: boolean
+): MapSizeHasChangedType => {
+  return {
+    type: 'MAP_SIZE_CHANGED',
+    payload: hasChanged
+  }
+}
 
 export const setMapClickedCoords = (
   clickedLocation: Location

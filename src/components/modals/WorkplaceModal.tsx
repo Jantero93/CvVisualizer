@@ -1,15 +1,20 @@
+/** React, Redux */
 import React, { FocusEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Modal, Form, Button, Col, Row } from 'react-bootstrap';
+/** API */
+import { getLocation } from '../../services/MapServices';
 
+/** Actions */
+import { addWorkPlace } from '../../store/actions/mapActions';
+import { toggleWorkModal } from '../../store/actions/modalActions';
+
+/** Types */
+import { GeocodeResult } from '../../services/Types';
 import { Workplace } from '../../types/types';
 
-import { toggleWorkModal } from '../../store/actions/modalActions';
-import { addWorkPlace } from '../../store/actions/mapActions';
-
-import { getLocation } from '../../services/MapServices';
-import { GeocodeResult } from '../../services/Types';
+/** Css, UI */
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 
 const WorkplaceModal: React.FC = () => {
   const [name, setName] = useState<string>('');
