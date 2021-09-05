@@ -5,7 +5,7 @@ import { Map, MapBrowserEvent, MapEvent } from 'ol';
 import { Coordinate } from 'ol/coordinate';
 import { defaults as defaultControls } from 'ol/control';
 import { fromLonLat, toLonLat } from 'ol/proj';
-import Feature from 'ol/Feature';
+import Feature, { FeatureLike } from 'ol/Feature';
 import Icon from 'ol/style/Icon';
 import OSM from 'ol/source/OSM';
 import Style from 'ol/style/Style';
@@ -14,7 +14,6 @@ import Point from 'ol/geom/Point';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { View } from 'ol';
-
 export default class CvMap {
   readonly map: Map;
 
@@ -108,13 +107,17 @@ export default class CvMap {
       geometry: new Point(fromLonLat([lon, lat]))
     });
 
-    const featureStyle: Style = new Style({
-      image: new Icon({
-        src: SVG
-      })
-    });
+    newFeature.setStyle((_feature: FeatureLike, resolution: number): Style => {
+      resolution = resolution > 1500 ? 1500 : resolution;
+      resolution = resolution < 0.25 ? 0.25 : resolution;
 
-    newFeature.setStyle(featureStyle);
+      return new Style({
+        image: new Icon({
+          src: SVG,
+          scale: Math.pow(resolution / 20, -(1 / 10))
+        })
+      });
+    });
     newFeature.setId(featureId);
 
     this.getVectorLayer(layerId).getSource().addFeature(newFeature);

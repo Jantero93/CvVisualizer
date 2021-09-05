@@ -14,7 +14,18 @@ const initialState: MapState = {
   clickedFeatureId: undefined,
   sizeChanged: false,
   location: { latitude: 61.48, longitude: 23.79 },
-  workplaces: [],
+  workplaces: [
+    {
+      location: {latitude: 61.5, longitude: 23.79},
+      name: 'asd',
+      id: 'asd',
+    },
+    {
+      location: {latitude: 61.4, longitude: 23.5},
+      name: 'ad',
+      id: 'ad',
+    }
+  ],
   zoom: 13
 };
 
