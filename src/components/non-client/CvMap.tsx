@@ -106,19 +106,19 @@ export default class CvMap {
     const newFeature: Feature = new Feature({
       geometry: new Point(fromLonLat([lon, lat]))
     });
+    newFeature.setId(featureId);
 
-    newFeature.setStyle((_feature: FeatureLike, resolution: number): Style => {
-      resolution = resolution > 1500 ? 1500 : resolution;
+    newFeature.setStyle((__feature: FeatureLike, resolution: number): Style => {
+      resolution = resolution > 50 ? 50 : resolution;
       resolution = resolution < 0.25 ? 0.25 : resolution;
 
       return new Style({
         image: new Icon({
           src: SVG,
-          scale: Math.pow(resolution / 20, -(1 / 10))
+          scale: Math.pow(resolution / 5, -(1 / 4))
         })
       });
     });
-    newFeature.setId(featureId);
 
     this.getVectorLayer(layerId).getSource().addFeature(newFeature);
   }

@@ -28,7 +28,6 @@ import '../styles/MapComponent.css';
 const MapComponent: React.FC = () => {
   const [map, setMap] = useState<CvMap>();
   const mapRef = useRef<HTMLDivElement>(null);
-
   const dispatch = useDispatch();
 
   /** Redux states */
@@ -46,7 +45,7 @@ const MapComponent: React.FC = () => {
     (state: RootState) => state.map.workplaces
   );
 
-  /** Update map from Redux */
+  /** Update map from Redux && Split view change */
   useEffect(() => {
     map?.setZoomLevel(mapZoom);
     map?.setCenterView(mapLocation.longitude, mapLocation.latitude);
@@ -65,7 +64,7 @@ const MapComponent: React.FC = () => {
       dispatch(setMapView(location, zoom));
     });
 
-    /** Get coordinates & feature from map click */
+    /** Get coordinates & selected feature from map click */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mapRef.current?.addEventListener('click-map', (e: any) => {
       dispatch(setMapClickedCoords(e.detail.location));
@@ -73,6 +72,7 @@ const MapComponent: React.FC = () => {
     });
   }, [dispatch]);
 
+  /** Update icons on change */
   useEffect(() => {
     map?.removeAllSVGs();
     mapWorkPlaces.forEach((workplace: Workplace) => {

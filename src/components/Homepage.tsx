@@ -22,8 +22,10 @@ const Homepage: React.FC = () => {
       onDrag: () => dispatch(mapSizeHasChanged(true)),
       onDragEnd: () => dispatch(mapSizeHasChanged(true))
     });
-
     Split(['#split-col-left', '#split-col-right'], {});
+
+    /** Map may be initialized before split when it's size is wrong */
+    dispatch(mapSizeHasChanged(true));
   }, [dispatch]);
 
   return (
