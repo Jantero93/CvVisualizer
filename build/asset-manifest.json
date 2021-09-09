@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/cv-visualizer/static/css/main.83b39077.chunk.css",
+    "main.js": "/cv-visualizer/static/js/main.a428a923.chunk.js",
+    "main.js.map": "/cv-visualizer/static/js/main.a428a923.chunk.js.map",
+    "runtime-main.js": "/cv-visualizer/static/js/runtime-main.ddf351e0.js",
+    "runtime-main.js.map": "/cv-visualizer/static/js/runtime-main.ddf351e0.js.map",
+    "static/css/2.7a1f42f3.chunk.css": "/cv-visualizer/static/css/2.7a1f42f3.chunk.css",
+    "static/js/2.e1ce43c7.chunk.js": "/cv-visualizer/static/js/2.e1ce43c7.chunk.js",
+    "static/js/2.e1ce43c7.chunk.js.map": "/cv-visualizer/static/js/2.e1ce43c7.chunk.js.map",
+    "index.html": "/cv-visualizer/index.html",
+    "static/css/2.7a1f42f3.chunk.css.map": "/cv-visualizer/static/css/2.7a1f42f3.chunk.css.map",
+    "static/css/main.83b39077.chunk.css.map": "/cv-visualizer/static/css/main.83b39077.chunk.css.map",
+    "static/js/2.e1ce43c7.chunk.js.LICENSE.txt": "/cv-visualizer/static/js/2.e1ce43c7.chunk.js.LICENSE.txt",
+    "static/media/workplace.644bf0a4.svg": "/cv-visualizer/static/media/workplace.644bf0a4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ddf351e0.js",
+    "static/css/2.7a1f42f3.chunk.css",
+    "static/js/2.e1ce43c7.chunk.js",
+    "static/css/main.83b39077.chunk.css",
+    "static/js/main.a428a923.chunk.js"
+  ]
+}
