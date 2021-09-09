@@ -48,6 +48,7 @@ const WorkplaceModal: React.FC = () => {
       dispatch(addWorkPlace(newWork));
       dispatch(toggleWorkModal());
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
