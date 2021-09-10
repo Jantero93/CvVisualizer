@@ -42,7 +42,7 @@ const MapComponent: React.FC = () => {
     (state: RootState) => state.modal.showWorkplaceModal
   );
   const mapWorkPlaces: Workplace[] = useSelector(
-    (state: RootState) => state.map.workplaces
+    (state: RootState) => state.mainData.workplaces
   );
 
   /** Update map from Redux && Split view change */

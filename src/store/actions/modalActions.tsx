@@ -10,4 +10,3 @@ export const toggleJobModal = (): ToggleJobModalType => ({
 export const toggleWorkModal = (): ToggleWorkModalType => ({
   type: 'TOGGLE_WORK_MODAL'
 });
-

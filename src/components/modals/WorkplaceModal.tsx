@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { getLocation } from '../../services/MapServices';
 
 /** Actions */
-import { addWorkPlace } from '../../store/actions/mapActions';
+import { addWorkPlace } from '../../store/actions/mainDataActions';
 import { toggleWorkModal } from '../../store/actions/modalActions';
 
 /** Types */

@@ -1,11 +1,10 @@
-import { Location, Workplace, MapView } from '../../types/types';
+import { Location, MapView } from '../../types/types';
 
 export interface MapState {
   clickedCoords: Location;
   clickedFeatureId?: string;
   location: Location;
   sizeChanged: boolean;
-  workplaces: Workplace[];
   zoom: number;
 }
 
@@ -14,30 +13,15 @@ const initialState: MapState = {
   clickedFeatureId: undefined,
   sizeChanged: false,
   location: { latitude: 61.48, longitude: 23.79 },
-  workplaces: [
-    {
-      location: { latitude: 61.5, longitude: 23.79 },
-      name: 'asd',
-      id: 'asd'
-    },
-    {
-      location: { latitude: 61.4, longitude: 23.5 },
-      name: 'ad',
-      id: 'ad'
-    }
-  ],
+
   zoom: 13
 };
 
-export type AddWorkPlaceType = { type: 'ADD_WORKPLACE'; payload: Workplace };
 export type MapSizeHasChangedType = {
   type: 'MAP_SIZE_CHANGED';
   payload: boolean;
 };
-export type RemoveWorkPlaceType = {
-  type: 'REMOVE_WORKPLACE';
-  payload: Workplace;
-};
+
 export type SetMapClickCoordsType = {
   type: 'LAST_CLICKED_COORDS';
   payload: Location;
@@ -48,21 +32,15 @@ export type SetMapClickFeatureType = {
 };
 export type SetMapViewType = { type: 'SET_MAPVIEW'; payload: MapView };
 export type SetMapLocationType = { type: 'SET_LOCATION'; payload: Location };
-export type SetWorkPlaceType = {
-  type: 'SET_WORKPLACES';
-  payload: Workplace[];
-};
+
 export type SetZoomType = { type: 'SET_ZOOM'; payload: number };
 
 export type MapActions =
-  | AddWorkPlaceType
   | MapSizeHasChangedType
-  | RemoveWorkPlaceType
   | SetMapClickCoordsType
   | SetMapClickFeatureType
   | SetMapViewType
   | SetMapLocationType
-  | SetWorkPlaceType
   | SetZoomType;
 
 export const mapReducer = (
@@ -70,19 +48,8 @@ export const mapReducer = (
   action: MapActions
 ): MapState => {
   switch (action.type) {
-    case 'ADD_WORKPLACE':
-      return { ...state, workplaces: state.workplaces.concat(action.payload) };
-
     case 'MAP_SIZE_CHANGED':
       return { ...state, sizeChanged: !state.sizeChanged };
-
-    case 'REMOVE_WORKPLACE':
-      return {
-        ...state,
-        workplaces: state.workplaces.filter(
-          (work: Workplace) => action.payload !== work
-        )
-      };
 
     case 'LAST_CLICKED_COORDS':
       return {
@@ -108,9 +75,6 @@ export const mapReducer = (
         location: action.payload.location,
         zoom: action.payload.zoom
       };
-
-    case 'SET_WORKPLACES':
-      return { ...state, workplaces: action.payload };
 
     case 'SET_ZOOM':
       return { ...state, zoom: action.payload };

@@ -1,17 +1,11 @@
 import {
-  AddWorkPlaceType,
   MapSizeHasChangedType,
   SetMapClickCoordsType,
   SetMapClickFeatureType,
   SetMapViewType,
   SetZoomType
 } from '../reducers/mapReducer';
-import { Location, Workplace } from '../../types/types';
-
-export const addWorkPlace = (work: Workplace): AddWorkPlaceType => ({
-  payload: work,
-  type: 'ADD_WORKPLACE'
-});
+import { Location } from '../../types/types';
 
 export const mapSizeHasChanged = (
   hasChanged: boolean

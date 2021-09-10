@@ -10,7 +10,6 @@ const initialState: ModalState = {
 
 export type ToggleJobModalType = { type: 'TOGGLE_JOB_MODAL' };
 export type ToggleWorkModalType = { type: 'TOGGLE_WORK_MODAL' };
-
 export type ModalActions = ToggleJobModalType | ToggleWorkModalType;
 
 export const modalReducer = (

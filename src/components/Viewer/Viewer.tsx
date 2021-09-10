@@ -27,7 +27,7 @@ const Viewer: React.FC = () => {
       activeKey={activeTab}
       className="tabs-header"
       transition={false}
-      onSelect={(key) => dispatch(setActiveTab(key as ViewerTabs))}
+      onSelect={(tabName) => dispatch(setActiveTab(tabName as ViewerTabs))}
     >
       <Tab eventKey="employees" title="Employees" tabClassName="tab">
         <EmployeeViewer />
