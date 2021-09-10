@@ -1,5 +1,13 @@
-/** React */
-import React, { useState } from 'react';
+/** React, Redux */
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+/** Reducers, actions */
+import { RootState } from '../../store/reducers/rootReducer';
+import { setActiveTab } from '../../store/actions/viewerActions';
+
+/** Types */
+import { ViewerTabs } from '../../store/reducers/viewerReducer';
 
 /** Components */
 import EmployeeViewer from './EmployeeViewer';
@@ -9,14 +17,17 @@ import WorkplaceViewer from './WorkplaceViewer';
 import { Tab, Tabs } from 'react-bootstrap';
 
 const Viewer: React.FC = () => {
-  const [key, setKey] = useState<string>('employees');
+  const activeTab: string = useSelector(
+    (state: RootState) => state.viewer.activeTab
+  );
+  const dispatch = useDispatch();
 
   return (
     <Tabs
-      activeKey={key}
+      activeKey={activeTab}
       className="tabs-header"
       transition={false}
-      onSelect={(tabKey) => setKey(tabKey as string)}
+      onSelect={(key) => dispatch(setActiveTab(key as ViewerTabs))}
     >
       <Tab eventKey="employees" title="Employees" tabClassName="tab">
         <EmployeeViewer />

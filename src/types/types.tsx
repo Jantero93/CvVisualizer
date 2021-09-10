@@ -9,7 +9,7 @@ export type Person = {
   name?: string;
   age?: number;
   education: string;
-  workplace: Workplace;
+  workExperience?: WorkExperience[];
 };
 
 export type WorkExperience = {
@@ -17,8 +17,8 @@ export type WorkExperience = {
   username: string;
   beginTime: string;
   endTime?: string;
+  description?: string;
   title: string;
-  typeOfWork?: string;
   workplace: Workplace;
 };
 
