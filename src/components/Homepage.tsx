@@ -9,6 +9,7 @@ import { mapSizeHasChanged } from '../store/actions/mapActions';
 import MapComponent from './MapComponent';
 import Split from 'split.js';
 import Timeline from './Timeline';
+import Viewer from './Viewer/Viewer';
 
 /** Css */
 import '../styles/Homepage.css';
@@ -39,9 +40,7 @@ const Homepage: React.FC = () => {
         <div id="split-row-bottom">
           <div className="split-nested">
             <div id="split-col-left">
-              <div style={{ border: '1px solid' }}>
-                Tähän tulee viewer <br /> asd
-              </div>
+              <Viewer />
             </div>
             <div id="split-col-right">
               <Timeline />

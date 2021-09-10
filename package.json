@@ -1,6 +1,5 @@
 {
   "name": "cv-visualizer",
-  "homepage": "https://Jantero93.github.io/cv-visualizer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -32,8 +31,6 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "winpty gh pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -63,7 +60,6 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "gh-pages": "^3.2.3",
     "prettier": "^2.3.2",
     "redux-devtools-extension": "^2.13.9"
   }
