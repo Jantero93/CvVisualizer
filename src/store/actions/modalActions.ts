@@ -3,14 +3,11 @@ import {
   ToggleWorkModalType
 } from '../reducers/modalReducer';
 
-export const toggleJobModal = (): ToggleJobModalType => {
-  return {
-    type: 'TOGGLE_JOB_MODAL'
-  };
-};
+export const toggleJobModal = (): ToggleJobModalType => ({
+  type: 'TOGGLE_JOB_MODAL'
+});
 
-export const toggleWorkModal = (): ToggleWorkModalType => {
-  return {
-    type: 'TOGGLE_WORK_MODAL'
-  };
-};
+export const toggleWorkModal = (): ToggleWorkModalType => ({
+  type: 'TOGGLE_WORK_MODAL'
+});
+
