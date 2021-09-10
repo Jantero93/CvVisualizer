@@ -14,7 +14,7 @@ import EmployeeViewer from './EmployeeViewer';
 import WorkplaceViewer from './WorkplaceViewer';
 
 /** Css, UI */
-import { Tab, Tabs } from 'react-bootstrap';
+import { Nav, Tab, Tabs } from 'react-bootstrap';
 
 const Viewer: React.FC = () => {
   const activeTab: string = useSelector(
@@ -23,19 +23,22 @@ const Viewer: React.FC = () => {
   const dispatch = useDispatch();
 
   return (
-    <Tabs
-      activeKey={activeTab}
-      className="tabs-header"
-      transition={false}
-      onSelect={(tabName) => dispatch(setActiveTab(tabName as ViewerTabs))}
-    >
-      <Tab eventKey="employees" title="Employees" tabClassName="tab">
-        <EmployeeViewer />
-      </Tab>
-      <Tab eventKey="workplaces" title="Workplaces" tabClassName="tab">
-        <WorkplaceViewer />
-      </Tab>
-    </Tabs>
+    // https://react-bootstrap.github.io/components/navs/
+    <div className="viewer">
+      <Tabs
+        activeKey={activeTab}
+        className="tabs-header"
+        transition={false}
+        onSelect={(tabName) => dispatch(setActiveTab(tabName as ViewerTabs))}
+      >
+        <Tab eventKey="employees" title="Employees" tabClassName="tab">
+          <EmployeeViewer />
+        </Tab>
+        <Tab eventKey="workplaces" title="Workplaces" tabClassName="tab">
+          <WorkplaceViewer />
+        </Tab>
+      </Tabs>
+    </div>
   );
 };
 
