@@ -10,13 +10,11 @@ import {
   setMapClickedFeature,
   setMapView
 } from '../store/actions/mapActions';
-import { toggleWorkModal } from '../store/actions/modalActions';
 
 /** Types */
 import { Location, Workplace } from '../types/types';
 
 /** Components */
-import { Button } from 'react-bootstrap';
 import CvMap from './non-client/CvMap';
 import WorkplaceModal from './modals/WorkplaceModal';
 
@@ -87,17 +85,8 @@ const MapComponent: React.FC = () => {
     });
   }, [mapWorkPlaces, map]);
 
-  const toggleModal = (): void => {
-    dispatch(toggleWorkModal());
-  };
-
   return (
     <div id="map-container">
-      <div className="tool-bar">
-        <Button variant="primary" onClick={toggleModal}>
-          Add Place
-        </Button>
-      </div>
       <div id="map" ref={mapRef} />
       {showWorkModal && <WorkplaceModal />}
     </div>
