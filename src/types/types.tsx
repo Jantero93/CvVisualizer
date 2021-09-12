@@ -6,7 +6,7 @@ export type Location = {
 export type Person = {
   id?: string;
   username: string;
-  name?: string;
+  name: string;
   age?: number;
   education: string;
   workExperience?: WorkExperience[];

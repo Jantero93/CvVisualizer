@@ -13,7 +13,7 @@ import EmployeeViewer from './EmployeeViewer';
 import WorkplaceViewer from './WorkplaceViewer';
 
 /** Types */
-import { Workplace } from '../../types/types';
+import { Person, Workplace } from '../../types/types';
 
 /** Css, UI */
 import { Button, Nav } from 'react-bootstrap';
@@ -24,7 +24,7 @@ const Viewer: React.FC = () => {
   const activeTab: string = useSelector(
     (state: RootState) => state.viewer.activeTab
   );
-  const selectedViewerItem: Workplace | undefined = useSelector(
+  const selectedViewerItem: Workplace | Person | undefined = useSelector(
     (state: RootState) => state.viewer.selectedItem
   );
 
@@ -61,6 +61,7 @@ const Viewer: React.FC = () => {
             variant={'danger'}
             onClick={() =>
               selectedViewerItem &&
+              'location' in selectedViewerItem &&
               dispatch(setMapLocation(selectedViewerItem.location))
             }
           >

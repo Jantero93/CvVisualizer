@@ -37,8 +37,12 @@ const WorkplaceViewer: React.FC = () => {
         {workplaces.map((place: Workplace) => (
           <tr
             key={place.id}
-            style={selectedItem === place ? { backgroundColor: '#dc3545' } : {}}
             onClick={() => dispatch(setSelectedItem(place))}
+            style={
+              'location' in place && selectedItem === place
+                ? { backgroundColor: '#dc3545' }
+                : {}
+            }
           >
             <td>{place.name}</td>
             <td>{place.address}</td>
