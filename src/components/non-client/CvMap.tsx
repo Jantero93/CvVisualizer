@@ -6,6 +6,7 @@ import { Coordinate } from 'ol/coordinate';
 import { defaults as defaultControls } from 'ol/control';
 import { fromLonLat, toLonLat } from 'ol/proj';
 import Feature, { FeatureLike } from 'ol/Feature';
+import Geometry from 'ol/geom/Geometry';
 import Icon from 'ol/style/Icon';
 import OSM from 'ol/source/OSM';
 import Style from 'ol/style/Style';
@@ -21,7 +22,7 @@ export default class CvMap {
    * @param targetDiv Div where map is initialized
    */
   constructor(targetDiv: HTMLElement) {
-    const defaultLayer: VectorLayer = new VectorLayer({
+    const defaultLayer: VectorLayer<VectorSource<Geometry>> = new VectorLayer({
       source: new VectorSource()
     });
     defaultLayer.setProperties({
@@ -58,7 +59,7 @@ export default class CvMap {
       );
     });
 
-    this.map.on('click', (e: MapBrowserEvent) => {
+    this.map.on('click', (e: MapBrowserEvent<UIEvent>) => {
       const clickedFeatureId: string | undefined = e.map
         ?.getFeaturesAtPixel(e.pixel)[0]
         ?.getId() as string;
@@ -90,7 +91,7 @@ export default class CvMap {
     layerId: string
   ): void {
     const mapContainsFeature: boolean = this.getAllFeatures().some(
-      (feature: Feature) => feature.getId() === featureId
+      (feature: Feature<Geometry>) => feature.getId() === featureId
     );
 
     if (mapContainsFeature) {
@@ -103,7 +104,7 @@ export default class CvMap {
       return;
     }
 
-    const newFeature: Feature = new Feature({
+    const newFeature: Feature<Geometry> = new Feature({
       geometry: new Point(fromLonLat([lon, lat]))
     });
     newFeature.setId(featureId);
@@ -133,7 +134,7 @@ export default class CvMap {
       return;
     }
 
-    const layer: VectorLayer = new VectorLayer({
+    const layer: VectorLayer<VectorSource<Geometry>> = new VectorLayer({
       source: new VectorSource()
     });
     layer.setProperties({ id });
@@ -145,9 +146,10 @@ export default class CvMap {
    * Get all features from map
    * @returns Feature array
    */
-  private getAllFeatures(): Feature[] {
-    const allFeatures: Feature[][] = this.getAllVectorLayers().map(
-      (layer: VectorLayer) => layer.getSource().getFeatures()
+  private getAllFeatures(): Feature<Geometry>[] {
+    const allFeatures: Feature<Geometry>[][] = this.getAllVectorLayers().map(
+      (layer: VectorLayer<VectorSource<Geometry>>) =>
+        layer.getSource().getFeatures()
     );
     /** Return Feature[][] as Feature[] */
     return Array.prototype.concat.apply([], allFeatures);
@@ -159,7 +161,7 @@ export default class CvMap {
    */
   private getAllVectorLayerIds(): string[] {
     return this.getAllVectorLayers().map(
-      (layer: VectorLayer) => layer.getProperties().id
+      (layer: VectorLayer<VectorSource<Geometry>>) => layer.getProperties().id
     );
   }
 
@@ -167,11 +169,13 @@ export default class CvMap {
    * Return all vector layers from map
    * @returns Vector layer array
    */
-  private getAllVectorLayers(): VectorLayer[] {
+  private getAllVectorLayers(): VectorLayer<VectorSource<Geometry>>[] {
     return this.map
       .getLayers()
       .getArray()
-      .filter((layer) => layer instanceof VectorLayer) as VectorLayer[];
+      .filter((layer) => layer instanceof VectorLayer) as VectorLayer<
+      VectorSource<Geometry>
+    >[];
   }
 
   /**
@@ -179,16 +183,17 @@ export default class CvMap {
    * @param id of wanter layer
    * @returns Vector layer
    */
-  private getVectorLayer(id: string): VectorLayer {
+  private getVectorLayer(id: string): VectorLayer<VectorSource<Geometry>> {
     return this.getAllVectorLayers().find(
-      (layer: VectorLayer) => layer.getProperties().id === id
-    ) as VectorLayer;
+      (layer: VectorLayer<VectorSource<Geometry>>) =>
+        layer.getProperties().id === id
+    ) as VectorLayer<VectorSource<Geometry>>;
   }
   /**
    * Removes all SVGs (map features) from map
    */
   removeAllSVGs(): void {
-    this.getAllFeatures().forEach((feature: Feature) =>
+    this.getAllFeatures().forEach((feature: Feature<Geometry>) =>
       this.removeSVG(feature.getId() as string)
     );
   }
@@ -210,13 +215,14 @@ export default class CvMap {
    * @param id id of feature
    */
   removeSVG(id: string): void {
-    const layerWithFeature: VectorLayer = this.getAllVectorLayers().find(
-      (layer: VectorLayer) =>
-        layer
-          .getSource()
-          .getFeatures()
-          .some((feature: Feature) => feature.getId() === id)
-    ) as VectorLayer;
+    const layerWithFeature: VectorLayer<VectorSource<Geometry>> =
+      this.getAllVectorLayers().find(
+        (layer: VectorLayer<VectorSource<Geometry>>) =>
+          layer
+            .getSource()
+            .getFeatures()
+            .some((feature: Feature<Geometry>) => feature.getId() === id)
+      ) as VectorLayer<VectorSource<Geometry>>;
 
     layerWithFeature
       .getSource()
