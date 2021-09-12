@@ -24,6 +24,7 @@ export type WorkExperience = {
 
 export type Workplace = {
   id?: string;
+  address: string;
   name: string;
   description?: string;
   location: Location;

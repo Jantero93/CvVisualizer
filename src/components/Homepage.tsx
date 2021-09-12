@@ -25,7 +25,7 @@ const Homepage: React.FC = () => {
     });
     Split(['#split-col-left', '#split-col-right'], {
       direction: 'horizontal',
-      minSize: 330
+      minSize: 360
     });
 
     /** Map may be initialized before split when it's size is wrong */

@@ -13,7 +13,6 @@ const initialState: MapState = {
   clickedFeatureId: undefined,
   sizeChanged: false,
   location: { latitude: 61.48, longitude: 23.79 },
-
   zoom: 13
 };
 

@@ -9,12 +9,86 @@ const initialState: MainDataState = {
     {
       location: { latitude: 61.5, longitude: 23.79 },
       name: 'asd',
-      id: 'asd'
+      id: '1',
+      address: 'Tie street 33'
     },
     {
       location: { latitude: 61.4, longitude: 23.5 },
       name: 'ad',
-      id: 'ad'
+      id: '2',
+      address: 'cityStreet 23'
+    },
+    {
+      location: { latitude: 61.5, longitude: 23.79 },
+      name: 'asd',
+      id: '3',
+      address: 'Tie street 33'
+    },
+    {
+      location: { latitude: 61.4, longitude: 23.5 },
+      name: 'ad',
+      id: '4',
+      address: 'cityStreet 23'
+    },
+    {
+      location: { latitude: 61.5, longitude: 23.79 },
+      name: 'asd',
+      id: '5',
+      address: 'Tie street 33'
+    },
+    {
+      location: { latitude: 61.4, longitude: 23.5 },
+      name: 'ad',
+      id: '6',
+      address: 'cityStreet 23'
+    },
+    {
+      location: { latitude: 61.5, longitude: 23.79 },
+      name: 'asd',
+      id: '7',
+      address: 'Tie street 33'
+    },
+    {
+      location: { latitude: 61.4, longitude: 23.5 },
+      name: 'ad',
+      id: '8',
+      address: 'cityStreet 23'
+    },
+    {
+      location: { latitude: 61.5, longitude: 23.79 },
+      name: 'asd',
+      id: '9',
+      address: 'Tie street 33'
+    },
+    {
+      location: { latitude: 61.4, longitude: 23.5 },
+      name: 'ad',
+      id: '10',
+      address: 'cityStreet 23'
+    },
+    {
+      location: { latitude: 61.5, longitude: 23.79 },
+      name: 'asd',
+      id: '11',
+      address: 'Tie street 33'
+    },
+    {
+      location: { latitude: 61.4, longitude: 23.5 },
+      name: 'ad',
+      id: '12',
+      address: 'cityStreet 23'
+    },
+    {
+      location: { latitude: 61.5, longitude: 23.79 },
+      name: 'asd',
+      id: '13',
+      address: 'Tie street 33'
+    },
+    {
+      location: { latitude: 61.4, longitude: 23.5 },
+      name: 'ad',
+      id: '14',
+      address: 'cityStreet 23'
     }
   ]
 };

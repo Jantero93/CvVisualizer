@@ -40,6 +40,7 @@ const WorkplaceModal: React.FC = () => {
           longitude: apiresponse.location?.longitude as number
         },
         name,
+        address,
         description,
         size,
         id: (Math.random() * (10000000 - 3) + 3).toString()

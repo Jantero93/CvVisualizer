@@ -2,6 +2,7 @@ import {
   MapSizeHasChangedType,
   SetMapClickCoordsType,
   SetMapClickFeatureType,
+  SetMapLocationType,
   SetMapViewType,
   SetZoomType
 } from '../reducers/mapReducer';
@@ -26,6 +27,11 @@ export const setMapClickedFeature = (
 ): SetMapClickFeatureType => ({
   payload: clickedFeatureId,
   type: 'LAST_CLICKED_FEATURE_ID'
+});
+
+export const setMapLocation = (location: Location): SetMapLocationType => ({
+  payload: location,
+  type: 'SET_LOCATION'
 });
 
 export const setMapView = (
