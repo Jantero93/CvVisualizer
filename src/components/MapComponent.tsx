@@ -1,6 +1,6 @@
 /** React, Redux */
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Reducer, actions */

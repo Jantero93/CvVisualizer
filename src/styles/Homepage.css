@@ -17,6 +17,10 @@
   height: 100%;
 }
 
+#split-col-left {
+  overflow-y: auto;
+}
+
 .gutter {
   background-color: #eee;
   background-repeat: no-repeat;
