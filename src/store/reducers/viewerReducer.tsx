@@ -1,10 +1,10 @@
-import { Person, Workplace } from '../../types/types';
+import { Workplace } from '../../types/types';
 
 export type ViewerTabs = 'employees' | 'workplaces';
 
 export interface ViewerState {
   activeTab: ViewerTabs;
-  selectedItem?: Person | Workplace;
+  selectedItem?: Workplace;
 }
 
 const initialState: ViewerState = {
@@ -19,7 +19,7 @@ export type SetActiveTabType = {
 
 export type SetSelectedItemType = {
   type: 'SET_SELECTED_ITEM';
-  payload: Person | Workplace;
+  payload: Workplace;
 };
 
 export type ViewerActions = SetActiveTabType | SetSelectedItemType;

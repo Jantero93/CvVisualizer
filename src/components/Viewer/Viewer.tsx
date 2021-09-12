@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 /** Reducers, actions */
 import { RootState } from '../../store/reducers/rootReducer';
 import { setActiveTab } from '../../store/actions/viewerActions';
+import { setMapLocation } from '../../store/actions/mapActions';
 import { toggleWorkModal } from '../../store/actions/modalActions';
-
-/** Types */
-import { ViewerTabs } from '../../store/reducers/viewerReducer';
 
 /** Components */
 import EmployeeViewer from './EmployeeViewer';
 import WorkplaceViewer from './WorkplaceViewer';
+
+/** Types */
+import { Workplace } from '../../types/types';
 
 /** Css, UI */
 import { Button, Nav } from 'react-bootstrap';
@@ -22,6 +23,9 @@ const Viewer: React.FC = () => {
   const dispatch = useDispatch();
   const activeTab: string = useSelector(
     (state: RootState) => state.viewer.activeTab
+  );
+  const selectedViewerItem: Workplace | undefined = useSelector(
+    (state: RootState) => state.viewer.selectedItem
   );
 
   return (
@@ -52,6 +56,15 @@ const Viewer: React.FC = () => {
             onClick={() => dispatch(toggleWorkModal())}
           >
             Add place
+          </Button>
+          <Button
+            variant={'danger'}
+            onClick={() =>
+              selectedViewerItem &&
+              dispatch(setMapLocation(selectedViewerItem.location))
+            }
+          >
+            Show map
           </Button>
         </Nav.Item>
       </Nav>

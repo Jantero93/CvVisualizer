@@ -1,5 +1,5 @@
 /** Types */
-import { Person, Workplace } from '../../types/types';
+import { Workplace } from '../../types/types';
 
 import {
   SetActiveTabType,
@@ -13,7 +13,7 @@ export const setActiveTab = (tab: ViewerTabs): SetActiveTabType => ({
 });
 
 export const setSelectedItem = (
-  selectedItem: Person | Workplace
+  selectedItem: Workplace
 ): SetSelectedItemType => ({
   payload: selectedItem,
   type: 'SET_SELECTED_ITEM'
