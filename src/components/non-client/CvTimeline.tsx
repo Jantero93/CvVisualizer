@@ -5,21 +5,64 @@ import { DataGroup, DataItem, TimelineOptions } from 'vis-timeline';
 import { DataSet } from 'vis-data';
 import { Timeline } from 'vis-timeline';
 
+import moment from 'moment';
+
 export default class CvTimeline {
   readonly timeline: Timeline;
   readonly dataGroups: DataSet<DataGroup>;
   readonly dataItems: DataSet<DataItem>;
 
+  /**
+   * initialize timeline without groups.
+   * @param targetDiv Target Div to render
+   */
   constructor(targetDiv: HTMLElement) {
-    this.dataGroups = new DataSet<DataGroup>();
     this.dataItems = new DataSet<DataItem>();
-    const options: TimelineOptions = {};
+    this.dataGroups = new DataSet<DataGroup>();
 
-    this.timeline = new Timeline(
-      targetDiv,
-      this.dataItems,
-      this.dataGroups,
-      options
-    );
+    const options: TimelineOptions = {
+      selectable: true
+    };
+
+    this.dataItems.add([{ id: '0', content: 'name', start: new Date() }]);
+    this.timeline = new Timeline(targetDiv, this.dataItems, options);
+  }
+
+  /**
+   * Adds dataitem to timeline. Specify optional group on item.
+   * @param item Data item to timeline
+   */
+  addItem(item: DataItem): void {
+    if (this.dataItems.get(item.id as string)) {
+      console.error(`Item with id ${item.id} exists already`);
+      return;
+    }
+
+    this.dataItems.add(item);
+  }
+
+  /**
+   * Add group. All non-group items will go invisible, but will exists in timeline.
+   * These invisible items will not come back after all groups are deleted
+   * @param group Group to add
+   */
+  addGroup(group: DataGroup): void {
+    /** Add data group on first */
+    !this.dataGroups.length && this.timeline.setGroups(this.dataGroups);
+
+    if (this.dataGroups.get(group.id as string)) {
+      console.error(`Group with id ${group.id} exists already`);
+      return;
+    }
+
+    this.dataGroups.add(group);
+  }
+
+  /**
+   * Clears data from timeline (doesn't destroy timeline from DOM)
+   */
+  clearData(): void {
+    this.dataItems.clear();
+    this.dataGroups.clear();
   }
 }
