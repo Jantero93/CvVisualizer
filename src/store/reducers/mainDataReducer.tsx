@@ -11,19 +11,58 @@ const initialState: MainDataState = {
       id: '1',
       education: 'education',
       username: 'username',
-      name: 'Mathew'
+      name: 'Mathew',
+      workExperience: [
+        {
+          title: 'lääkäri',
+          username: 'pentti123',
+          beginTime: new Date().toString(),
+          workplace: {
+            address: 'salainen tie',
+            location: { latitude: 12, longitude: 12 },
+            name: 'tyopaikka'
+          }
+        },
+        {
+          title: 'pankkiiri',
+          username: 'pentti123',
+          beginTime: new Date().toString(),
+          workplace: {
+            address: 'salainen tie uusi',
+            location: { latitude: 24, longitude: 24 },
+            name: 'toinen paikka'
+          }
+        }
+      ]
     },
     {
       id: '2',
       education: 'steel worker',
       username: 'username2',
-      name: 'Toby'
-    },
-    {
-      id: '3',
-      education: 'Office worker',
-      username: 'office123',
-      name: 'Jim'
+
+      name: 'Toby',
+      workExperience: [
+        {
+          title: 'johtaja',
+          username: 'pentti123',
+          beginTime: new Date().toString(),
+          workplace: {
+            address: 'salainen tie',
+            location: { latitude: 12, longitude: 12 },
+            name: 'tyopaikka'
+          }
+        },
+        {
+          title: 'raksamestastari',
+          username: 'pentti123',
+          beginTime: new Date().toString(),
+          workplace: {
+            address: 'salainen tie uusi',
+            location: { latitude: 24, longitude: 24 },
+            name: 'toinen paikka'
+          }
+        }
+      ]
     }
   ],
   workplaces: [

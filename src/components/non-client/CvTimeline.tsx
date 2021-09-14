@@ -24,7 +24,6 @@ export default class CvTimeline {
       selectable: true
     };
 
-    this.dataItems.add([{ id: '0', content: 'name', start: new Date() }]);
     this.timeline = new Timeline(targetDiv, this.dataItems, options);
   }
 
@@ -32,7 +31,7 @@ export default class CvTimeline {
    * Adds dataitem to timeline. Specify optional group on item.
    * @param item Data item to timeline
    */
-  addItem(item: DataItem): void {
+  private addItem(item: DataItem): void {
     if (this.dataItems.get(item.id as string)) {
       console.error(`Item with id ${item.id} exists already`);
       return;
@@ -64,5 +63,13 @@ export default class CvTimeline {
   clearData(): void {
     this.dataItems.clear();
     this.dataGroups.clear();
+  }
+
+  setItemsData(itemData: DataItem[]): void {
+    itemData.forEach((item: DataItem) => this.dataItems.add(item));
+  }
+
+  setGroupdData(groupData: DataGroup[]): void {
+    groupData.forEach((group: DataGroup) => this.dataGroups.add(group));
   }
 }
