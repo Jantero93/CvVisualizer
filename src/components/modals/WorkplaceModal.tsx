@@ -43,7 +43,8 @@ const WorkplaceModal: React.FC = () => {
         address,
         description,
         size,
-        id: (Math.random() * (10000000 - 3) + 3).toString()
+        id: (Math.random() * (10000000 - 3) + 3).toString(),
+        workExperiences: []
       };
 
       dispatch(addWorkPlace(newWork));

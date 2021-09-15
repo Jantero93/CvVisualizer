@@ -1,4 +1,5 @@
 import { Location, MapView } from '../../types/types';
+import { mapInitialState } from './initialStates';
 
 export interface MapState {
   clickedCoords: Location;
@@ -8,13 +9,7 @@ export interface MapState {
   zoom: number;
 }
 
-const initialState: MapState = {
-  clickedCoords: { latitude: 0, longitude: 0 },
-  clickedFeatureId: undefined,
-  sizeChanged: false,
-  location: { latitude: 61.48, longitude: 23.79 },
-  zoom: 13
-};
+const initialState: MapState = mapInitialState;
 
 export type MapSizeHasChangedType = {
   type: 'MAP_SIZE_CHANGED';

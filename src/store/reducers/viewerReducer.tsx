@@ -1,3 +1,4 @@
+import { viewerInitialState } from './initialStates';
 import { Person, Workplace } from '../../types/types';
 
 export type ViewerTabs = 'employees' | 'workplaces';
@@ -7,10 +8,7 @@ export interface ViewerState {
   selectedItem?: Workplace | Person;
 }
 
-const initialState: ViewerState = {
-  activeTab: 'workplaces',
-  selectedItem: undefined
-};
+const initialState: ViewerState = viewerInitialState;
 
 export type SetActiveTabType = {
   type: 'SET_ACTIVE_TAB';

@@ -1,8 +1,18 @@
+/** Map related */
+export type MapView = {
+  location: Location;
+  zoom: number;
+};
+
 export type Location = {
   latitude: number;
   longitude: number;
 };
 
+// workExperience array or array of refs?
+// Should person and website user be own types?
+
+/** User (login etc.) / Person-related */
 export type Person = {
   id?: string;
   username: string;
@@ -12,6 +22,7 @@ export type Person = {
   workExperience?: WorkExperience[];
 };
 
+/** User's or companies work experiences */
 export type WorkExperience = {
   id?: string;
   username: string;
@@ -19,9 +30,10 @@ export type WorkExperience = {
   endTime?: string;
   description?: string;
   title: string;
-  workplace: Workplace;
+  workplaceRef: string;
 };
 
+/** Working places */
 export type Workplace = {
   id?: string;
   address: string;
@@ -29,9 +41,5 @@ export type Workplace = {
   description?: string;
   location: Location;
   size?: string;
-};
-
-export type MapView = {
-  location: Location;
-  zoom: number;
+  workExperiences?: WorkExperience[];
 };

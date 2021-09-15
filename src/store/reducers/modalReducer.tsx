@@ -1,12 +1,10 @@
+import { modalInitialState } from './initialStates';
 export interface ModalState {
   showWorkplaceModal: boolean;
   showJobExpModal: boolean;
 }
 
-const initialState: ModalState = {
-  showJobExpModal: false,
-  showWorkplaceModal: false
-};
+const initialState: ModalState = modalInitialState;
 
 export type ToggleJobModalType = { type: 'TOGGLE_JOB_MODAL' };
 export type ToggleWorkModalType = { type: 'TOGGLE_WORK_MODAL' };
