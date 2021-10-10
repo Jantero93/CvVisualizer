@@ -37,9 +37,17 @@ const WorkExperienceModal: React.FC = () => {
     };
   }, []);
 
-  const handleSave = (e: React.MouseEvent<HTMLElement, MouseEvent>): void => {
+  const handleSave = (e: React.FormEvent): void => {
+    console.log('form submitted');
     e.preventDefault();
-    console.log('handle save!');
+  };
+
+  const MapWorkplacesDropdown = (): JSX.Element[] => {
+    return workPlaces.map((work: Workplace) => (
+      <option key={work.id} value={work.id}>
+        {`${work.name} ${work.address}`}
+      </option>
+    ));
   };
 
   return (
@@ -63,11 +71,7 @@ const WorkExperienceModal: React.FC = () => {
                 }
               >
                 <option value="">Choose workplace</option>
-                {workPlaces.map((work: Workplace) => (
-                  <option key={work.id} value={work.id}>
-                    {`${work.name} ${work.address}`}
-                  </option>
-                ))}
+                {MapWorkplacesDropdown()}
               </Form.Control>
             </Form.Group>
 

@@ -26,7 +26,7 @@ const WorkplaceModal: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleSave = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!apiresponse || !name.length) {
