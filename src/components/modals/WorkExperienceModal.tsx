@@ -1,10 +1,31 @@
-import React from 'react';
-import { Modal, Form, Row, Col, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+/** React */
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+/** Reducers, actions */
 import { toggleWorkExperienceModal } from '../../store/actions/modalActions';
+import { RootState } from '../../store/reducers/rootReducer';
+
+/** Types */
+import { Workplace } from '../../types/types';
+
+/** Utils */
+import moment from 'moment';
+
+/** Css, Ui */
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 
 const WorkExperienceModal: React.FC = () => {
   const dispatch = useDispatch();
+  const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState<Date>();
+  const [description, setDescription] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [workplace, setWorkplace] = useState<Workplace>();
+
+  const workPlaces: Workplace[] = useSelector(
+    (state: RootState) => state.mainData.workplaces
+  );
 
   return (
     <Modal show animation={false}>
@@ -12,33 +33,46 @@ const WorkExperienceModal: React.FC = () => {
         closeButton
         onClick={() => dispatch(toggleWorkExperienceModal())}
       >
-        <Modal.Title>New workplace</Modal.Title>
+        <Modal.Title>New Experience</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formName">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>Workplace</Form.Label>
+              <Form.Control as={'select'}>
+                {workPlaces.map((work: Workplace) => (
+                  <option key={work.id} value={work.id}>
+                    {`${work.name} ${work.address}`}
+                  </option>
+                ))}
+              </Form.Control>
             </Form.Group>
 
             <Form.Group as={Col} controlId="formEmployees">
-              <Form.Label>Employees</Form.Label>
-              <Form.Control as={'select'}>
-                <option value="tiny">under 5</option>
-                <option value="small">6 - 25</option>
-                <option value="medium-minus">26 - 100</option>
-                <option value="medium">101 - 300</option>
-                <option value="medium-plus">301 - 1000</option>
-                <option value="large">1001 - 3000</option>
-                <option value="very large">over 3000</option>
-              </Form.Control>
+              <Form.Label>Title</Form.Label>
+              <Form.Control as={'input'}></Form.Control>
             </Form.Group>
           </Row>
 
           <Form.Group className="mb-3" controlId="formGridAddress1">
-            <Form.Label>Address</Form.Label>
-            <Form.Control />
-            <Form.Text muted>jotain</Form.Text>
+            <Form.Label>Start Date</Form.Label>
+            <Form.Control
+              type="date"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setStartDate(moment(e.target.value).toDate())
+              }
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formGridAddress1">
+            <Form.Label>End Date</Form.Label>
+            <Form.Control
+              type="date"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setEndDate(moment(e.target.value).toDate())
+              }
+            />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formGridAddress2">
