@@ -1,10 +1,14 @@
 /** React */
 import React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 /** Reducers, actions */
 import { RootState } from '../store/reducers/rootReducer';
+import { toggleWorkExperienceModal } from '../store/actions/modalActions';
+
+/** Components */
+import WorkExperienceModal from './modals/WorkExperienceModal';
 
 /** Timeline */
 import CvTimeline from './non-client/CvTimeline';
@@ -15,13 +19,20 @@ import { DataItem, DataGroup } from 'vis-timeline';
 
 /** CSS, UI */
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
+import { Button } from 'react-bootstrap';
 
 const Timeline: React.FC = () => {
   const [timeline, setTimeline] = useState<CvTimeline>();
   const timelineRef = useRef<HTMLDivElement>(null);
+
   const viewerItem: Person | Workplace | undefined = useSelector(
     (state: RootState) => state.viewer.selectedItem
   );
+  const showExperienceModal: boolean = useSelector(
+    (state: RootState) => state.modal.showWorkExperienceModal
+  );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setTimeline(new CvTimeline(timelineRef.current as HTMLElement));
@@ -61,6 +72,9 @@ const Timeline: React.FC = () => {
   }, [timeline, viewerItem]);
 
   useEffect(() => {
+    /** Check is employee or workplace selected, put
+     *  content in timeline
+     */
     if (viewerItem) {
       'education' in viewerItem ? setPersonTimeline() : setWorkplaceTimeline();
     }
@@ -68,7 +82,14 @@ const Timeline: React.FC = () => {
 
   return (
     <div className="timeline-app">
+      <Button
+        onClick={() => dispatch(toggleWorkExperienceModal())}
+        variant={'danger'}
+      >
+        Add Experince
+      </Button>
       <div id="timeline" ref={timelineRef} />
+      {showExperienceModal && <WorkExperienceModal />}
     </div>
   );
 };

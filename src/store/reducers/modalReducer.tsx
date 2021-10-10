@@ -1,12 +1,12 @@
 import { modalInitialState } from './initialStates';
 export interface ModalState {
   showWorkplaceModal: boolean;
-  showJobExpModal: boolean;
+  showWorkExperienceModal: boolean;
 }
 
 const initialState: ModalState = modalInitialState;
 
-export type ToggleJobModalType = { type: 'TOGGLE_JOB_MODAL' };
+export type ToggleJobModalType = { type: 'TOGGLE_WORK_EXPERIENCE_MODAL' };
 export type ToggleWorkModalType = { type: 'TOGGLE_WORK_MODAL' };
 export type ModalActions = ToggleJobModalType | ToggleWorkModalType;
 
@@ -15,10 +15,10 @@ export const modalReducer = (
   action: ModalActions
 ): ModalState => {
   switch (action.type) {
-    case 'TOGGLE_JOB_MODAL':
+    case 'TOGGLE_WORK_EXPERIENCE_MODAL':
       return {
         ...state,
-        showJobExpModal: !state.showJobExpModal,
+        showWorkExperienceModal: !state.showWorkExperienceModal,
         showWorkplaceModal: false
       };
 
@@ -26,7 +26,7 @@ export const modalReducer = (
       return {
         ...state,
         showWorkplaceModal: !state.showWorkplaceModal,
-        showJobExpModal: false
+        showWorkExperienceModal: false
       };
 
     default:

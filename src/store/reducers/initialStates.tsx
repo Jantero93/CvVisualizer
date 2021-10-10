@@ -9,7 +9,7 @@ export const mainDataInitialState: MainDataState = {
 };
 
 export const modalInitialState: ModalState = {
-  showJobExpModal: false,
+  showWorkExperienceModal: false,
   showWorkplaceModal: false
 };
 
