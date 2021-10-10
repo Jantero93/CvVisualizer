@@ -1,5 +1,5 @@
 /** React */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Reducers, actions */
@@ -17,15 +17,30 @@ import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 
 const WorkExperienceModal: React.FC = () => {
   const dispatch = useDispatch();
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState<Date>();
   const [description, setDescription] = useState<string>('');
+  const [endDate, setEndDate] = useState<Date>();
+  const [startDate, setStartDate] = useState<Date>();
   const [title, setTitle] = useState<string>('');
-  const [workplace, setWorkplace] = useState<Workplace>();
+  const [workplaceId, setWorkplaceId] = useState<string>();
 
   const workPlaces: Workplace[] = useSelector(
     (state: RootState) => state.mainData.workplaces
   );
+
+  useEffect(() => {
+    return () => {
+      setDescription('');
+      setEndDate(new Date());
+      setStartDate(new Date());
+      setTitle('');
+      setWorkplaceId(undefined);
+    };
+  }, []);
+
+  const handleSave = (e: React.MouseEvent<HTMLElement, MouseEvent>): void => {
+    e.preventDefault();
+    console.log('handle save!');
+  };
 
   return (
     <Modal show animation={false}>
@@ -40,7 +55,14 @@ const WorkExperienceModal: React.FC = () => {
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formName">
               <Form.Label>Workplace</Form.Label>
-              <Form.Control as={'select'}>
+              <Form.Control
+                as={'select'}
+                defaultValue=""
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  setWorkplaceId(e.target.value)
+                }
+              >
+                <option value="">Choose workplace</option>
                 {workPlaces.map((work: Workplace) => (
                   <option key={work.id} value={work.id}>
                     {`${work.name} ${work.address}`}
@@ -51,7 +73,12 @@ const WorkExperienceModal: React.FC = () => {
 
             <Form.Group as={Col} controlId="formEmployees">
               <Form.Label>Title</Form.Label>
-              <Form.Control as={'input'}></Form.Control>
+              <Form.Control
+                as={'input'}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setTitle(e.target.value)
+                }
+              ></Form.Control>
             </Form.Group>
           </Row>
 
@@ -77,10 +104,15 @@ const WorkExperienceModal: React.FC = () => {
 
           <Form.Group className="mb-3" controlId="formGridAddress2">
             <Form.Label>Description</Form.Label>
-            <Form.Control as={'textarea'} />
+            <Form.Control
+              as={'textarea'}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setDescription(e.target.value)
+              }
+            />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" onClick={handleSave}>
             Save
           </Button>
         </Form>
