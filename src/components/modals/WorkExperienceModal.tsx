@@ -7,7 +7,7 @@ import { toggleWorkExperienceModal } from '../../store/actions/modalActions';
 import { RootState } from '../../store/reducers/rootReducer';
 
 /** Types */
-import { Workplace } from '../../types/types';
+import { WorkExperience, Workplace } from '../../types/types';
 
 /** Utils */
 import moment from 'moment';
@@ -38,8 +38,22 @@ const WorkExperienceModal: React.FC = () => {
   }, []);
 
   const handleSave = (e: React.FormEvent): void => {
-    console.log('form submitted');
     e.preventDefault();
+
+    const isDatesValid = (): boolean => moment(startDate).isBefore(endDate);
+
+    if (!workplaceId || !title || !isDatesValid()) return;
+
+    const newExperience: WorkExperience = {
+      beginTime: startDate!.toISOString(),
+      description: description,
+      endTime: endDate!.toISOString(),
+      username: 'testuser',
+      title: title,
+      workplaceRef: workplaceId
+    };
+
+    console.log(`newExperience`, newExperience);
   };
 
   const MapWorkplacesDropdown = (): JSX.Element[] => {
