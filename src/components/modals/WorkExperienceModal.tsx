@@ -9,7 +9,7 @@ import { RootState } from '../../store/reducers/rootReducer';
 /** Types */
 import { Workplace } from '../../types/types';
 
-/** Utils */
+/** Utils  */
 import moment from 'moment';
 
 /** Css, Ui */
