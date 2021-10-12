@@ -105,7 +105,7 @@ const WorkplaceModal: React.FC = () => {
                 <option value="medium">101 - 300</option>
                 <option value="medium-plus">301 - 1000</option>
                 <option value="large">1001 - 3000</option>
-                <option value="very large">over 3000</option>
+                <option value="very-large">over 3000</option>
               </Form.Control>
             </Form.Group>
           </Row>

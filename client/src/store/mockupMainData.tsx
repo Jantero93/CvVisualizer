@@ -11,14 +11,14 @@ export const TestMainStateData: MainDataState = {
       workExperience: [
         {
           id: '6',
-          title: 'lääkäri',
-          username: 'pentti123',
+          title: 'doctor',
+          username: 'triple h',
           beginTime: new Date().toISOString(),
-          workplaceRef: 'salainen id'
+          workplaceRef: 'secret id'
         },
         {
           id: '7',
-          title: 'pankkiiri',
+          title: 'banker',
           username: 'pentti123',
           beginTime: new Date().toISOString(),
           workplaceRef: '123'
@@ -34,14 +34,14 @@ export const TestMainStateData: MainDataState = {
       workExperience: [
         {
           id: '8',
-          title: 'johtaja',
-          username: 'pentti123',
+          title: 'Leader',
+          username: 'kelly123',
           beginTime: new Date().toISOString(),
-          workplaceRef: 'joku id'
+          workplaceRef: 'some id'
         },
         {
-          title: 'raksamestastari',
-          username: 'pentti123',
+          title: 'building master ',
+          username: 'Beth123',
           beginTime: new Date().toISOString(),
           workplaceRef: '554561'
         }
@@ -57,7 +57,7 @@ export const TestMainStateData: MainDataState = {
           id: '9',
           beginTime: new Date().toISOString(),
           title: 'reindeer master',
-          username: 'no user name',
+          username: 'test name',
           workplaceRef: '45612'
         }
       ]
@@ -73,7 +73,7 @@ export const TestMainStateData: MainDataState = {
         {
           beginTime: new Date().toISOString(),
           title: 'reindeer master',
-          username: 'no user name',
+          username: 'abc name',
           workplaceRef: '1'
         }
       ]
@@ -87,7 +87,7 @@ export const TestMainStateData: MainDataState = {
         {
           beginTime: new Date().toISOString(),
           title: 'reindeer master',
-          username: 'no user name',
+          username: 'deg name',
           workplaceRef: '2'
         }
       ]
@@ -101,7 +101,7 @@ export const TestMainStateData: MainDataState = {
         {
           beginTime: new Date().toISOString(),
           title: 'reindeer master',
-          username: 'no user name',
+          username: 'john name',
           workplaceRef: '3'
         }
       ]

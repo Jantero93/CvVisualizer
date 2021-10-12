@@ -16,7 +16,6 @@ import moment from 'moment';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 
 const WorkExperienceModal: React.FC = () => {
-  const dispatch = useDispatch();
   const [description, setDescription] = useState<string>('');
   const [endDate, setEndDate] = useState<Date>();
   const [startDate, setStartDate] = useState<Date>();
@@ -26,6 +25,8 @@ const WorkExperienceModal: React.FC = () => {
   const workPlaces: Workplace[] = useSelector(
     (state: RootState) => state.mainData.workplaces
   );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     return () => {
@@ -40,20 +41,26 @@ const WorkExperienceModal: React.FC = () => {
   const handleSave = (e: React.FormEvent): void => {
     e.preventDefault();
 
-    const isDatesValid = (): boolean => moment(startDate).isBefore(endDate);
+    const isDatesValid: boolean = moment(startDate).isBefore(endDate);
 
-    if (!workplaceId || !title || !isDatesValid()) return;
+    if (!workplaceId || !title) {
+      console.log('Please check title, workplace ic');
+      return;
+    }
 
-    const newExperience: WorkExperience = {
-      beginTime: startDate!.toISOString(),
-      description: description,
-      endTime: endDate!.toISOString(),
-      username: 'testuser',
-      title: title,
-      workplaceRef: workplaceId
-    };
-
-    console.log(`newExperience`, newExperience);
+    if (startDate && endDate && isDatesValid) {
+      const newExperience: WorkExperience = {
+        beginTime: startDate.toISOString(),
+        description: description,
+        endTime: endDate.toISOString(),
+        username: 'testUser',
+        title: title,
+        workplaceRef: workplaceId
+      };
+      console.log(`newExperience`, newExperience);
+    } else {
+      console.log('Please check dates');
+    }
   };
 
   const MapWorkplacesDropdown = (): JSX.Element[] => {
