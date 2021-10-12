@@ -1,14 +1,13 @@
-package com.main.CvVisualizerServer;
+package com.main.cv;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CvVisualizerServerApplication {
+public class CvApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CvVisualizerServerApplication.class, args);
-
+		SpringApplication.run(CvApplication.class, args);
 	}
 
 }

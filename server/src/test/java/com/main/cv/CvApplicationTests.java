@@ -1,10 +1,10 @@
-package com.example.CvVisualizerServer;
+package com.main.cv;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CvVisualizerServerApplicationTests {
+class CvApplicationTests {
 
 	@Test
 	void contextLoads() {
