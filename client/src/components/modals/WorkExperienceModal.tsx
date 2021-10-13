@@ -57,7 +57,6 @@ const WorkExperienceModal: React.FC = () => {
         title: title,
         workplaceRef: workplaceId
       };
-      console.log(`newExperience`, newExperience);
     } else {
       console.log('Please check dates');
     }

@@ -16,5 +16,9 @@
     "MAPVIEW",
     "moveend",
     "viewchange"
+  ],  
+  "eslint.workingDirectories": [
+    "client"
   ]
+
 }

@@ -18,9 +18,9 @@ const App: React.FC = () => {
       <Router>
         <div className="header">
           <Header />
-        </div>
+        </div> 
         <div className="content">
-          <Switch>
+          <Switch> 
             <Route exact path="/">
               <Homepage />
             </Route>

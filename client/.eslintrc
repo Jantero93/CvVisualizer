@@ -21,7 +21,6 @@
     "plugin:react-hooks/recommended",
     "prettier"
   ],
-  
   "parser": "@typescript-eslint/parser",
   "root": true,
   "plugins": ["react", "@typescript-eslint", "prettier"],
