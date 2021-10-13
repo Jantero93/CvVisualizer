@@ -1,4 +1,4 @@
-package com.main.cv.repositiories;
+package com.main.cv.items;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -8,13 +8,14 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import java.util.UUID;
 
 @Entity
 @Data
 @AllArgsConstructor @NoArgsConstructor
-public class Location extends AbstractPersistable<Long> {
-    private Double latitude;
-    private Double longitude;
+public class Location extends AbstractPersistable<UUID> {
+    private String latitude;
+    private String longitude;
 
     @JsonIgnore
     @OneToOne(mappedBy = "location")

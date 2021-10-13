@@ -1,9 +1,7 @@
 package com.main.cv.controllers;
 
-import com.main.cv.repositiories.WorkplaceRepository;
-import com.main.cv.repositiories.Location;
-import com.main.cv.repositiories.LocationRepository;
-import com.main.cv.repositiories.Workplace;
+import com.main.cv.items.Workplace;
+import com.main.cv.services.WorkplaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,35 +12,16 @@ import java.util.List;
 public class WorkplaceController {
 
     @Autowired
-    private WorkplaceRepository workplaceRepository;
-
-    @Autowired
-    private LocationRepository locationRepository;
+    private WorkplaceService workplaceService;
 
     @GetMapping("/addtestdata")
     public String addTestData() {
-        if (workplaceRepository.findAll().size() > 0) {
-            return "data exists already, maybe no need to create more";
-        }
-            for ( int i = 0; i < 10; i++ ) {
-                Workplace w = new Workplace();
-                w.setAddress( "street " + i * 10 );
-                w.setDescription( "description + " + i * 100 );
-                w.setSize( "small" );
-                Location l = new Location();
-                l.setLatitude( 2d );
-                l.setLongitude( 2d );
-                locationRepository.save( l );
-                w.setLocation( l );
-                workplaceRepository.save( w );
-            }
-
-        return "probably add test data was successful";
+        return workplaceService.addTestWorkplaceData() ? "Added test data" : "Failed adding or data exists";
     }
 
     @GetMapping("/workplaces")
     public List<Workplace> getAllWorkPlaces() {
-        return workplaceRepository.findAll();
+        return workplaceService.getAllWorkplaces();
     }
 
 }
