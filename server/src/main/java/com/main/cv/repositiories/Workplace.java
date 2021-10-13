@@ -1,5 +1,6 @@
-package com.main.cv;
+package com.main.cv.repositiories;
 
+import com.main.cv.repositiories.Location;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 @Entity
 @Data

@@ -1,5 +1,9 @@
-package com.main.cv;
+package com.main.cv.controllers;
 
+import com.main.cv.repositiories.WorkplaceRepository;
+import com.main.cv.repositiories.Location;
+import com.main.cv.repositiories.LocationRepository;
+import com.main.cv.repositiories.Workplace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

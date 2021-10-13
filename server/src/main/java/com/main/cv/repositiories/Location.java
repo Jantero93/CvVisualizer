@@ -1,5 +1,6 @@
-package com.main.cv;
+package com.main.cv.repositiories;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ public class Location extends AbstractPersistable<Long> {
     private Double latitude;
     private Double longitude;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "location")
     private Workplace workplace;
 
