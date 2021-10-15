@@ -19,25 +19,25 @@ public class WorkplaceService {
     LocationRepository locationRepository;
 
     public boolean addTestWorkplaceData() {
-        if ( workplaceRepository.findAll().size() > 0 ) {
+        if (workplaceRepository.findAll().size() > 0) {
             return false;
         }
 
         StringBuilder name = new StringBuilder("test");
 
-        for ( int i = 0; i < 10; i++ ) {
+        for (int i = 0; i < 10; i++) {
             Workplace w = new Workplace();
-            w.setAddress( "street " + i * 10 );
-            w.setDescription( "description + " + i * 100 );
-            w.setName( name.append( i ).toString() );
-            w.setSize( "small" );
+            w.setAddress("street " + i * 10);
+            w.setDescription("description + " + i * 100);
+            w.setName(name.append(i).toString());
+            w.setSize("small");
 
             Location l = new Location();
-            l.setLatitude( Integer.toString( i + 2 ) );
-            l.setLongitude( Integer.toString( i - 2 ) );
-            w.setLocation( l );
-            locationRepository.save( l );
-            workplaceRepository.save( w );
+            l.setLatitude(Integer.toString(i + 2));
+            l.setLongitude(Integer.toString(i - 2));
+            w.setLocation(l);
+            locationRepository.save(l);
+            workplaceRepository.save(w);
         }
         return true;
     }

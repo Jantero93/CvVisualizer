@@ -3,6 +3,7 @@ package com.main.cv.items;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -12,7 +13,9 @@ import java.util.UUID;
 
 @Entity
 @Data
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Location extends AbstractPersistable<UUID> {
     private String latitude;
     private String longitude;
