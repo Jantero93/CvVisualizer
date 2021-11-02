@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### MOCK UP Databas ###
+database.mv.db
