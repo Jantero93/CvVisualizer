@@ -19,6 +19,10 @@
   ],  
   "eslint.workingDirectories": [
     "client"
-  ]
+  ],
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "java.debug.settings.hotCodeReplace": "auto"
 
 }
