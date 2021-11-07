@@ -21,7 +21,7 @@ export const getLocation = async (
         latitude: lat,
         longitude: lng
       },
-      longName: result.formatted_address
+      longName: result.formatted_address,
     };
   });
 };

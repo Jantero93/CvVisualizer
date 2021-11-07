@@ -14,12 +14,12 @@ public class WorkplaceController {
     @Autowired
     private WorkplaceService workplaceService;
 
-    @GetMapping("/addtestdata")
+    @GetMapping("/api/addtestdata")
     public String addTestData() {
         return workplaceService.addTestWorkplaceData() ? "Added test data" : "Failed adding or data exists";
     }
 
-    @GetMapping("/workplaces")
+    @GetMapping("/api/workplaces")
     public List<Workplace> getAllWorkPlaces() {
         return workplaceService.getAllWorkplaces();
     }
