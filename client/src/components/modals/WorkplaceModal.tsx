@@ -2,8 +2,9 @@
 import React, { FocusEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-/** API */
+/** API, Services */
 import { getLocation } from '../../services/MapServices';
+import WorkplaceService from '../../services/WorkplaceService';
 
 /** Actions */
 import { addWorkPlace } from '../../store/actions/mainDataActions';
@@ -43,11 +44,12 @@ const WorkplaceModal: React.FC = () => {
         address,
         description,
         size,
-        id: (Math.random() * (10000000 - 3) + 3).toString(),
         workExperiences: []
       };
 
-      dispatch(addWorkPlace(newWork));
+      const response: Workplace = await WorkplaceService.postOne(newWork);
+
+      dispatch(addWorkPlace(response));
       dispatch(toggleWorkModal());
     } catch (error) {
       // eslint-disable-next-line no-console

@@ -15,7 +15,7 @@ export type Location = {
 /** User (login etc.) / Person-related */
 export type Person = {
   id?: string;
-  username: string;
+  username?: string;
   name: string;
   age?: number;
   education: string;

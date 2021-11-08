@@ -45,4 +45,8 @@ public class WorkplaceService {
     public List<Workplace> getAllWorkplaces() {
         return workplaceRepository.findAll();
     }
+
+    public Workplace saveOneWorkplace(Workplace workplace) {
+        return workplaceRepository.save(workplace);
+    }
 }

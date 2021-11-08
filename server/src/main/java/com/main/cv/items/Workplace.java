@@ -6,7 +6,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import java.util.UUID;
 
@@ -15,13 +19,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Workplace extends AbstractPersistable<UUID> {
+public class Workplace extends AbstractPersistable<Long> {
 
     private String address;
     private String name;
     private String description;
     private String size;
 
-    @OneToOne
+    @OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
     private Location location;
 }

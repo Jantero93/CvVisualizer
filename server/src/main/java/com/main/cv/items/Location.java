@@ -16,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Location extends AbstractPersistable<UUID> {
+public class Location extends AbstractPersistable<Long> {
     private String latitude;
     private String longitude;
 
