@@ -1,0 +1,1 @@
+java -jar server/target/cv-0.0.1-SNAPSHOT.jar
