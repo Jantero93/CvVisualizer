@@ -15,10 +15,11 @@
     "apiresponse",
     "MAPVIEW",
     "moveend",
-    "viewchange"
+    "viewchange",
+    "workexperiences"
   ],  
   "eslint.workingDirectories": [
-    "client"
+    "server/src/main/client"
   ],
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
@@ -29,7 +30,11 @@
   },
   "java.configuration.updateBuildConfiguration": "interactive",
   "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "editor.fontSize": 13,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 
 }

@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import java.util.UUID;
 
 @Entity
 @Data

@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleWorkExperienceModal } from '../../store/actions/modalActions';
 import { RootState } from '../../store/reducers/rootReducer';
 
+/** Services */
+import WorkExperienceService from '../../services/WorkExperienceService';
+
 /** Types */
 import { WorkExperience, Workplace } from '../../types/types';
 
@@ -38,7 +41,7 @@ const WorkExperienceModal: React.FC = () => {
     };
   }, []);
 
-  const handleSave = (e: React.FormEvent): void => {
+  const handleSave = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
     const isDatesValid: boolean = moment(startDate).isBefore(endDate);
@@ -57,6 +60,12 @@ const WorkExperienceModal: React.FC = () => {
         title: title,
         workplaceRef: workplaceId
       };
+
+      try {
+        await WorkExperienceService.postOne(newExperience);
+      } catch (error) {
+        console.log('save failed');
+      }
     } else {
       console.log('Please check dates');
     }

@@ -7,12 +7,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import java.util.UUID;
 
 @Entity
 @Data
