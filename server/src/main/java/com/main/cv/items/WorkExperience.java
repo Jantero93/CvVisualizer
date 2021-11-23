@@ -20,6 +20,6 @@ public class WorkExperience extends AbstractPersistable<Long> {
     private String description;
     private String endTime;
     private String title;
-    private Long workplaceRed;
+    private Long workplaceRef;
 
 }

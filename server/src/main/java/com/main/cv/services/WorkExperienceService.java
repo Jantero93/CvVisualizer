@@ -1,5 +1,7 @@
 package com.main.cv.services;
 
+import java.util.List;
+
 import com.main.cv.items.WorkExperience;
 import com.main.cv.repositiories.WorkExperienceRepository;
 
@@ -14,6 +16,10 @@ public class WorkExperienceService {
 
     public WorkExperience saveOne(WorkExperience workExperience) {
         return workExperienceRepository.save(workExperience);
+    }
+
+    public List<WorkExperience> getAll() {
+        return workExperienceRepository.findAll();
     }
 
 }
