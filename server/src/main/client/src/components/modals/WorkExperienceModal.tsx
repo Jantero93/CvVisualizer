@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Reducers, actions */
+import { addWorkExperience } from '../../store/actions/mainDataActions';
 import { toggleWorkExperienceModal } from '../../store/actions/modalActions';
 import { RootState } from '../../store/reducers/rootReducer';
 
@@ -62,9 +63,12 @@ const WorkExperienceModal: React.FC = () => {
       };
 
       try {
-        await WorkExperienceService.postOne(newExperience);
+        const response: WorkExperience = await WorkExperienceService.postOne(newExperience);
+        dispatch(addWorkExperience(response))
+        dispatch(toggleWorkExperienceModal());
       } catch (error) {
-        console.log('save failed');
+        // eslint-disable-next-line no-console
+        console.log(error);
       }
     } else {
       console.log('Please check dates');

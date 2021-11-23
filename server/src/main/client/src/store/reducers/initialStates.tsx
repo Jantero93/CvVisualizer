@@ -5,6 +5,7 @@ import { ViewerState } from './viewerReducer';
 
 export const mainDataInitialState: MainDataState = {
   persons: [],
+  workExperiences: [],
   workplaces: []
 };
 

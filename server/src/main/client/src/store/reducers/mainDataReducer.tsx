@@ -1,14 +1,20 @@
-import { Person, Workplace } from '../../types/types';
+import { Person, WorkExperience, Workplace } from '../../types/types';
 
 import { TestMainStateData } from '../mockupMainData';
 
 export interface MainDataState {
   persons: Person[];
+  workExperiences: WorkExperience[];
   workplaces: Workplace[];
 }
 
 const initialState: MainDataState = TestMainStateData;
 
+
+export type AddWorkExperienceType = {
+  type: 'ADD_WORKEXPERIENCE';
+  payload: WorkExperience;
+};
 export type AddWorkPlaceType = { type: 'ADD_WORKPLACE'; payload: Workplace };
 export type RemoveWorkPlaceType = {
   type: 'REMOVE_WORKPLACE';
@@ -20,6 +26,7 @@ export type SetWorkPlaceType = {
 };
 
 export type MainDataActions =
+  | AddWorkExperienceType
   | AddWorkPlaceType
   | RemoveWorkPlaceType
   | SetWorkPlaceType;
@@ -31,6 +38,12 @@ export const mainDataReducer = (
   switch (action.type) {
     case 'ADD_WORKPLACE':
       return { ...state, workplaces: state.workplaces.concat(action.payload) };
+
+    case 'ADD_WORKEXPERIENCE':
+      return {
+        ...state,
+        workExperiences: state.workExperiences.concat(action.payload)
+      };
 
     case 'REMOVE_WORKPLACE':
       return {

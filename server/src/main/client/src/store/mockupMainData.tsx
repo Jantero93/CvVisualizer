@@ -63,6 +63,7 @@ export const TestMainStateData: MainDataState = {
       ]
     }
   ],
+  workExperiences: [{beginTime: 'sad', title: 'sda', username: 'sad', workplaceRef: '-1', description: 'sad', endTime: '123'}],
   workplaces: [
     {
       location: { latitude: 61.5, longitude: 23.79 },
