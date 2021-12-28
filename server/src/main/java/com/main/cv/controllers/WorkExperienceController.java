@@ -19,8 +19,8 @@ public class WorkExperienceController {
     private WorkExperienceService workExperienceService;
 
     @PostMapping(BASE_URL)
-    public WorkExperience postOneWorkExperience(@RequestBody WorkExperience workExperience) {
-        return workExperienceService.saveOne(workExperience);
+    public WorkExperience postOneWorkExperience( @RequestBody WorkExperience workExperience ) {
+        return workExperienceService.saveOne( workExperience );
     }
 
     @GetMapping(BASE_URL)

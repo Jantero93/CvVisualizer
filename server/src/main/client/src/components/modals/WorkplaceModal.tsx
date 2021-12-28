@@ -114,6 +114,10 @@ const WorkplaceModal: React.FC = () => {
 
           <Form.Group className="mb-3" controlId="formGridAddress1">
             <Form.Label>Address</Form.Label>
+            <Form.Text muted>
+              For example write Itsenäisyydenkatu 13 and unfocus field, auto
+              fill we do rest. This will be improved on future
+            </Form.Text>
             <Form.Control
               value={address}
               onChange={(e) => setAddress(e.target.value)}

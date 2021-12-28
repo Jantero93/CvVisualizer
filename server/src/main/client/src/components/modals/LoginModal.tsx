@@ -1,11 +1,15 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 
 /** CSS, UI */
 import { Button, Form, Modal } from 'react-bootstrap';
 
-const LoginModal: React.FC = () => {
+interface Props {
+  setShowLogin: React.Dispatch<SetStateAction<boolean>>;
+}
+
+const LoginModal: React.FC<Props> = ({ setShowLogin }: Props) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -15,6 +19,7 @@ const LoginModal: React.FC = () => {
 
   return (
     <Modal show animation={false}>
+      <Modal.Header closeButton onClick={() => setShowLogin(false)} />
       <Modal.Body>
         <Form>
           <Form.Group controlId="username-input">

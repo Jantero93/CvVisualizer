@@ -39,7 +39,7 @@ const Header: React.FC = () => {
           </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
-      {showLogin && <LoginModal />}
+      {showLogin && <LoginModal setShowLogin={setShowLogin} />}
     </>
   );
 };

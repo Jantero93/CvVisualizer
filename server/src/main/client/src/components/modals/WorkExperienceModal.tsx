@@ -63,8 +63,10 @@ const WorkExperienceModal: React.FC = () => {
       };
 
       try {
-        const response: WorkExperience = await WorkExperienceService.postOne(newExperience);
-        dispatch(addWorkExperience(response))
+        const response: WorkExperience = await WorkExperienceService.postOne(
+          newExperience
+        );
+        dispatch(addWorkExperience(response));
         dispatch(toggleWorkExperienceModal());
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -90,6 +92,10 @@ const WorkExperienceModal: React.FC = () => {
         onClick={() => dispatch(toggleWorkExperienceModal())}
       >
         <Modal.Title>New Experience</Modal.Title>
+        <Form.Text muted>
+          New experiences are updated to backend, but not in the front end,
+          feature is coming on the future..
+        </Form.Text>
       </Modal.Header>
       <Modal.Body>
         <Form>

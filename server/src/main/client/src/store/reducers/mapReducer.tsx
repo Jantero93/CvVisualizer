@@ -26,7 +26,6 @@ export type SetMapClickFeatureType = {
 };
 export type SetMapViewType = { type: 'SET_MAPVIEW'; payload: MapView };
 export type SetMapLocationType = { type: 'SET_LOCATION'; payload: Location };
-
 export type SetZoomType = { type: 'SET_ZOOM'; payload: number };
 
 export type MapActions =

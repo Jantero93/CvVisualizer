@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-CvApplication<cv>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.main.cv.CvApplication",
+      "projectName": "cv",
+      "args": ""
+    }
+  ]
+}

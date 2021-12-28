@@ -30,9 +30,9 @@ public class WorkplaceController {
     }
 
     @PostMapping(BASE_URL)
-    public Workplace postOneWorkplace(@RequestBody Workplace workplace) {
-        System.out.println(workplace);
-        return workplaceService.saveOneWorkplace(workplace);
+    public Workplace postOneWorkplace( @RequestBody Workplace workplace ) {
+        System.out.println( workplace );
+        return workplaceService.saveOneWorkplace( workplace );
     }
 
 }

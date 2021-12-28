@@ -1,6 +1,5 @@
 import { Person, WorkExperience, Workplace } from '../../types/types';
-
-import { TestMainStateData } from '../mockupMainData';
+import { mainDataInitialState } from './initialStates';
 
 export interface MainDataState {
   persons: Person[];
@@ -8,8 +7,7 @@ export interface MainDataState {
   workplaces: Workplace[];
 }
 
-const initialState: MainDataState = TestMainStateData;
-
+const initialState: MainDataState = mainDataInitialState;
 
 export type AddWorkExperienceType = {
   type: 'ADD_WORKEXPERIENCE';

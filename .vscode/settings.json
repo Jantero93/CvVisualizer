@@ -4,10 +4,7 @@
   "eslint.enable": true,
   "eslint.alwaysShowStatus": true,
   "eslint.autoFixOnSave": true,
-  "eslint.validate": [
-    "javascript",
-    "typescript"
-  ],
+  "eslint.validate": ["javascript", "typescript"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
@@ -17,10 +14,8 @@
     "moveend",
     "viewchange",
     "workexperiences"
-  ],  
-  "eslint.workingDirectories": [
-    "server/src/main/client"
   ],
+  "eslint.workingDirectories": ["server/src/main/client"],
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
   },
@@ -28,13 +23,11 @@
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.configuration.updateBuildConfiguration": "automatic",
   "[xml]": {
-    "editor.defaultFormatter": "DotJoshJohnson.xml"
+    "editor.defaultFormatter": "redhat.vscode-xml"
   },
-  "editor.fontSize": 13,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
-
 }

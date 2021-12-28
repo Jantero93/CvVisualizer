@@ -1,6 +1,6 @@
 import { Location } from '../types/types';
 
-/** MapService */
+/** MapService  */
 export type GeocodeResult = {
   location?: Location;
   longName?: string;
