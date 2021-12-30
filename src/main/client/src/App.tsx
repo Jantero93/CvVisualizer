@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setWorkPlaces } from './store/actions/mainDataActions';
 
-/** Components */
+/** Components  */
 import Header from './components/Header';
 import Homepage from './components/Homepage';
 import MapComponent from './components/MapComponent';
