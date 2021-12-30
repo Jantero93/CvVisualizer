@@ -6,6 +6,7 @@ target/*
 
 ### H2 File Database
 database.mv.db
+database.trace.db
 
 ### STS ###
 .apt_generated
