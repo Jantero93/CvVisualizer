@@ -3,7 +3,6 @@ package com.main.cv.controllers;
 import com.main.cv.items.Workplace;
 import com.main.cv.services.WorkplaceService;
 
-import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

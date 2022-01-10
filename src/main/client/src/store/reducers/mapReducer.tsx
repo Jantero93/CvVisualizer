@@ -15,7 +15,6 @@ export type MapSizeHasChangedType = {
   type: 'MAP_SIZE_CHANGED';
   payload: boolean;
 };
-
 export type SetMapClickCoordsType = {
   type: 'LAST_CLICKED_COORDS';
   payload: Location;

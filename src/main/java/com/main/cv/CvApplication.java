@@ -8,8 +8,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties
 public class CvApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CvApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CvApplication.class, args);
+    }
 
 }

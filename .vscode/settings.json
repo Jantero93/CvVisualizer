@@ -9,13 +9,16 @@
     "source.fixAll.eslint": true
   },
   "cSpell.words": [
+    "addtestdata",
     "apiresponse",
+    "Dserver",
+    "Dspring",
     "MAPVIEW",
     "moveend",
     "viewchange",
     "workexperiences"
   ],
-  "eslint.workingDirectories": ["server/src/main/client"],
+  "eslint.workingDirectories": ["src/main/client"],
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
   },
